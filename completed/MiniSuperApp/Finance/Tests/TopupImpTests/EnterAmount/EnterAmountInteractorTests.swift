@@ -4,113 +4,113 @@ import FinanceEntity
 import FinanceRepositoryTestSupport
 
 final class EnterAmountInteractorTests: XCTestCase {
-  
-  private var sut: EnterAmountInteractor!
-  private var presenter: EnterAmountPresentableMock!
-  private var dependency: EnterAmountDependencyMock!
-  private var listener: EnterAmountListenerMock!
-  
-  private var repository: SuperPayRepositoryMock! {
-    dependency.superPayRepository as? SuperPayRepositoryMock
-  }
-  
-  override func setUp() {
-    super.setUp()
     
-    self.presenter = EnterAmountPresentableMock()
-    self.dependency = EnterAmountDependencyMock()
-    self.listener = EnterAmountListenerMock()
+    private var sut: EnterAmountInteractor!
+    private var presenter: EnterAmountPresentableMock!
+    private var dependency: EnterAmountDependencyMock!
+    private var listener: EnterAmountListenerMock!
     
-    sut = EnterAmountInteractor(
-      presenter: self.presenter,
-      dependency: self.dependency
-    )
-    sut.listener = self.listener
-  }
-  
-  // MARK: - Tests
-  func testActivate() {
-    // given
-    let paymentMethod = PaymentMethod(
-      id: "id_0",
-      name: "name_0",
-      digits: "9999",
-      color: "#13ABE8FF",
-      isPrimary: false
-    )
-    dependency.selectedPaymentMethodSubject.send(paymentMethod)
+    private var repository: SuperPayRepositoryMock! {
+        dependency.superPayRepository as? SuperPayRepositoryMock
+    }
     
-    // when
-    sut.activate()
+    override func setUp() {
+        super.setUp()
+        
+        self.presenter = EnterAmountPresentableMock()
+        self.dependency = EnterAmountDependencyMock()
+        self.listener = EnterAmountListenerMock()
+        
+        sut = EnterAmountInteractor(
+            presenter: self.presenter,
+            dependency: self.dependency
+        )
+        sut.listener = self.listener
+    }
     
-    // then
-    XCTAssertEqual(presenter.updateSelectedPaymentMethodCallCount, 1)
-    XCTAssertEqual(presenter.updateSelectedPaymentMethodViewModel?.name, "name_0 9999")
-    XCTAssertNotNil(presenter.updateSelectedPaymentMethodViewModel?.image)
-  }
-  
-  func testTopupWithValidAmount() {
-    // given
-    let paymentMethod = PaymentMethod(
-      id: "id_0",
-      name: "name_0",
-      digits: "9999",
-      color: "#13ABE8FF",
-      isPrimary: false
-    )
-    dependency.selectedPaymentMethodSubject.send(paymentMethod)
+    // MARK: - Tests
+    func testActivate() {
+        // given
+        let paymentMethod = PaymentMethod(
+            id: "id_0",
+            name: "name_0",
+            digits: "9999",
+            color: "#13ABE8FF",
+            isPrimary: false
+        )
+        dependency.selectedPaymentMethodSubject.send(paymentMethod)
+        
+        // when
+        sut.activate()
+        
+        // then
+        XCTAssertEqual(presenter.updateSelectedPaymentMethodCallCount, 1)
+        XCTAssertEqual(presenter.updateSelectedPaymentMethodViewModel?.name, "name_0 9999")
+        XCTAssertNotNil(presenter.updateSelectedPaymentMethodViewModel?.image)
+    }
     
-    // when
-    sut.didTapTopup(with: 1_000_000)
+    func testTopupWithValidAmount() {
+        // given
+        let paymentMethod = PaymentMethod(
+            id: "id_0",
+            name: "name_0",
+            digits: "9999",
+            color: "#13ABE8FF",
+            isPrimary: false
+        )
+        dependency.selectedPaymentMethodSubject.send(paymentMethod)
+        
+        // when
+        sut.didTapTopup(with: 1_000_000)
+        
+        // then
+        XCTAssertEqual(presenter.startLoadingCallCount, 1)
+        XCTAssertEqual(presenter.stopLoadingCallCount, 1)
+        XCTAssertEqual(repository.topupCallCount, 1)
+        XCTAssertEqual(repository.paymentMethodID, "id_0")
+        XCTAssertEqual(repository.topupAmount, 1_000_000)
+        XCTAssertEqual(listener.enterAmountDidFinishTopupCallCount, 1)
+    }
     
-    // then
-    XCTAssertEqual(presenter.startLoadingCallCount, 1)
-    XCTAssertEqual(presenter.stopLoadingCallCount, 1)
-    XCTAssertEqual(repository.topupCallCount, 1)
-    XCTAssertEqual(repository.paymentMethodID, "id_0")
-    XCTAssertEqual(repository.topupAmount, 1_000_000)
-    XCTAssertEqual(listener.enterAmountDidFinishTopupCallCount, 1)
-  }
-  
-  func testTopupWithFailure() {
-    // given
-    let paymentMethod = PaymentMethod(
-      id: "id_0",
-      name: "name_0",
-      digits: "9999",
-      color: "#13ABE8FF",
-      isPrimary: false
-    )
-    dependency.selectedPaymentMethodSubject.send(paymentMethod)
-    repository.shouldTopupSucceed = false
+    func testTopupWithFailure() {
+        // given
+        let paymentMethod = PaymentMethod(
+            id: "id_0",
+            name: "name_0",
+            digits: "9999",
+            color: "#13ABE8FF",
+            isPrimary: false
+        )
+        dependency.selectedPaymentMethodSubject.send(paymentMethod)
+        repository.shouldTopupSucceed = false
+        
+        // when
+        sut.didTapTopup(with: 1_000_000)
+        
+        // then
+        XCTAssertEqual(presenter.startLoadingCallCount, 1)
+        XCTAssertEqual(presenter.stopLoadingCallCount, 1)
+        XCTAssertEqual(listener.enterAmountDidFinishTopupCallCount, 0)
+    }
     
-    // when
-    sut.didTapTopup(with: 1_000_000)
+    func testDidTapClose() {
+        // given
+        
+        // when
+        sut.didTapClose()
+        
+        // then
+        XCTAssertEqual(listener.enterAmountDidTapCloseCallCount, 1)
+    }
     
-    // then
-    XCTAssertEqual(presenter.startLoadingCallCount, 1)
-    XCTAssertEqual(presenter.stopLoadingCallCount, 1)
-    XCTAssertEqual(listener.enterAmountDidFinishTopupCallCount, 0)
-  }
-  
-  func testDidTapClose() {
-    // given
+    func testDidTapPaymentMethod() {
+        // given
+        
+        // when
+        sut.didTapPaymentMethod()
+        
+        // then
+        XCTAssertEqual(listener.enterAmountDidTapPaymentMethodCallCount, 1)
+    }
     
-    // when
-    sut.didTapClose()
-    
-    // then
-    XCTAssertEqual(listener.enterAmountDidTapCloseCallCount, 1)
-  }
-  
-  func testDidTapPaymentMethod() {
-    // given
-    
-    // when
-    sut.didTapPaymentMethod()
-    
-    // then
-    XCTAssertEqual(listener.enterAmountDidTapPaymentMethodCallCount, 1)
-  }
-  
 }

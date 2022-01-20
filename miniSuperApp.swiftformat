@@ -1,0 +1,11 @@
+# 기본적으로 알파벳 순서대로 정렬한다.
+
+# options
+--indent 4 # indent
+
+--swiftversion 5.3
+
+--exclude Carthage,fastlane,frameworks,Pods
+
+# --rules를 사용하면 나머지규칙은 비활성화된다고 함
+--rules indent
