@@ -83,9 +83,7 @@ final class TopupInteractor: Interactor, TopupInteractable {
     func listenToPaymentMethodAdded(paymentMethod: PaymentMethod) {
         dependency.paymentMethodStream.send(paymentMethod)
         if isEnterAmountRoot {
-            //router?.popToRoot()
-            router?.detachEnterAmount()
-            router?.attachEnterAmount()
+            router?.popToRoot()
         } else {
             isEnterAmountRoot = true
             router?.attachEnterAmount()

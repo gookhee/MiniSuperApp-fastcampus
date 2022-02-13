@@ -133,7 +133,7 @@ final class TopupRouter: Router<TopupInteractable>, TopupRouting {
     }
     
     func popToRoot() {
-        navigationControllerable?.popViewController(animated: true)
+        navigationControllable?.popToRoot(animated: true)
         resetChildRouting()
     }
 }
