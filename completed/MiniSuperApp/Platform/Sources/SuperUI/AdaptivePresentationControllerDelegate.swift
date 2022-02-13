@@ -11,7 +11,7 @@ public final class AdaptivePresentationControllerDelegateProxy: NSObject{
 
 
 extension AdaptivePresentationControllerDelegateProxy: UIAdaptivePresentationControllerDelegate {
-    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+    public func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
         delegate?.presentationControllerDidDismiss()
     }
 }
