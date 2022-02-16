@@ -6,8 +6,12 @@
 //
 
 import ModernRIBs
+import FinanceRepository
+import CombineUtil
+import AddPaymentMethod
+import FinanceEntity
 
-protocol TopupDependency: Dependency {
+public protocol TopupDependency: Dependency {
     // TODO: Make sure to convert the variable into lower-camelcase.
     /// Topup 리블렛이 소유하는 VC가 아니고, Topup 리블렛을 띄운? (attatch한?) 리블렛이 지정한 VC
     /// Topup에서 어떤 화면을 띄우고 싶을 때
@@ -43,17 +47,17 @@ final class TopupComponent: Component<TopupDependency>, TopupInteractorDependenc
 
 // MARK: - Builder
 
-protocol TopupBuildable: Buildable {
-    func build(withListener listener: TopupListener) -> TopupRouting
+public protocol TopupBuildable: Buildable {
+    func build(withListener listener: TopupListener) -> Routing
 }
 
-final class TopupBuilder: Builder<TopupDependency>, TopupBuildable {
+public final class TopupBuilder: Builder<TopupDependency>, TopupBuildable {
 
-    override init(dependency: TopupDependency) {
+    public override init(dependency: TopupDependency) {
         super.init(dependency: dependency)
     }
 
-    func build(withListener listener: TopupListener) -> TopupRouting {
+    public func build(withListener listener: TopupListener) -> Routing {
         let paymentMethodStream = CurrentValuePublisher(PaymentMethod(id: "", name: "", digits: "", color: "", isPrimary: false))
         let component = TopupComponent(dependency: dependency, paymentMethodStream: paymentMethodStream)
         let interactor = TopupInteractor(dependency: component)

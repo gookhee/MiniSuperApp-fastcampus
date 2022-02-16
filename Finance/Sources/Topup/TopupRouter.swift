@@ -7,13 +7,16 @@
 
 import ModernRIBs
 import UIKit
+import AddPaymentMethod
+import RIBsUtil
+import FinanceEntity
 
 protocol TopupInteractable: Interactable, AddPaymentMethodListener, EnterAmountListener, CardOnFileListener {
     var router: TopupRouting? { get set }
     var listener: TopupListener? { get set }
 }
 
-protocol TopupBaseViewControllable: ViewControllable {
+public protocol TopupBaseViewControllable: ViewControllable {
     // TODO: Declare methods the router invokes to manipulate the view hierarchy. Since
     // this RIB does not own its own view, this protocol is conformed to by one of this
     // RIB's ancestor RIBs' view.

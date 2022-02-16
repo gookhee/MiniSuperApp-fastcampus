@@ -1,8 +1,8 @@
 //
 //  PaymentMethodViewModel.swift
-//  MiniSuperApp
+//  
 //
-//  Created by 정국희 on 2021/12/15.
+//  Created by 정국희 on 2022/02/16.
 //
 
 import UIKit

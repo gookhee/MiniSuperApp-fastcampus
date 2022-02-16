@@ -8,6 +8,7 @@
 import Foundation
 import Combine
 import FinanceEntity
+import CombineUtil
 
 /// 서버 API를 호출하여 유저에게 등록됨 카드 리스트를 받아옴
 public protocol CardOnFileRepositoryAvailable {
@@ -27,6 +28,9 @@ public final class CardOnFileRepository: CardOnFileRepositoryAvailable {
 //    PaymentMethod(id: "4", name: "카카오뱅크", digits: "8751", color: "#ffcc00ff", isPrimary: false)
   ])
 
+    
+    public init() {}
+    
     public func addCard(info: AddPaymentMethodInfo) -> AnyPublisher<PaymentMethod, Error> {
         let paymentMethod = PaymentMethod(
             id: "00",

@@ -1,4 +1,5 @@
 import ModernRIBs
+import FinanceEntity
 
 protocol FinanceHomeRouting: ViewableRouting {
     // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.

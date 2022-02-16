@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import RIBsUtil
 
-extension UIViewController {
+public extension UIViewController {
     func setupNavigationItem(with buttonType: DismissButtonType, target: Any?, action: Selector?) {
         navigationItem.leftBarButtonItem = .init(
             image: .init(systemName: buttonType.iconSystemName),
