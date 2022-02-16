@@ -7,7 +7,7 @@ protocol TransportHomeInteractable: Interactable, TopupListener {
     var listener: TransportHomeListener? { get set }
 }
 
-protocol TransportHomeViewControllable: ViewControllable {
+protocol TransportHomeViewControllable: ViewControllable, TopupBaseViewControllable {
     // TODO: Declare methods the router invokes to manipulate the view hierarchy.
 }
 
@@ -29,7 +29,10 @@ final class TransportHomeRouter: ViewableRouter<TransportHomeInteractable, Trans
     func attachTopup() {
         guard nil == topupRouting else { return }
         
-        let router = topupBuildable.build(withListener: interactor)
+        let router = topupBuildable.build(
+            withListener: interactor,
+            topupBaseViewController: viewController
+        )
         
         attachChild(router)
         topupRouting = router

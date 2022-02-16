@@ -19,6 +19,7 @@
 		DE92089727BC655300E2077E /* FinanceEntity in Frameworks */ = {isa = PBXBuildFile; productRef = DE92089627BC655300E2077E /* FinanceEntity */; };
 		DE92089927BC655300E2077E /* FinanceRepository in Frameworks */ = {isa = PBXBuildFile; productRef = DE92089827BC655300E2077E /* FinanceRepository */; };
 		DEA0C8BD27BC9C6800478236 /* TransportHome in Frameworks */ = {isa = PBXBuildFile; productRef = DEA0C8BC27BC9C6800478236 /* TransportHome */; };
+		DEA8F6FC27BCC6C800919184 /* TopupImp in Frameworks */ = {isa = PBXBuildFile; productRef = DEA8F6FB27BCC6C800919184 /* TopupImp */; };
 		DEB6DEF227BBA67A0045EBB4 /* AddPaymentMethod in Frameworks */ = {isa = PBXBuildFile; productRef = DEB6DEF127BBA67A0045EBB4 /* AddPaymentMethod */; };
 		DEC1AE42276A0AA60024D730 /* CombineExt in Frameworks */ = {isa = PBXBuildFile; productRef = DEC1AE41276A0AA60024D730 /* CombineExt */; };
 		DEEA0CC227BCA8FB003A57E5 /* AppHome in Frameworks */ = {isa = PBXBuildFile; productRef = DEEA0CC127BCA8FB003A57E5 /* AppHome */; };
@@ -65,6 +66,7 @@
 				DE8F92D327BC6B7A0089F6DC /* CombineUtil in Frameworks */,
 				DE3BDC6927BC87C500EFFC47 /* Topup in Frameworks */,
 				DE92089727BC655300E2077E /* FinanceEntity in Frameworks */,
+				DEA8F6FC27BCC6C800919184 /* TopupImp in Frameworks */,
 				DE3BDC6727BC7B9300EFFC47 /* SuperUI in Frameworks */,
 				F5829F6E26DB2DE900BFA8CD /* ModernRIBs in Frameworks */,
 				DE0F302E27BCAB5E00754F6C /* ProfileHome in Frameworks */,
@@ -183,6 +185,7 @@
 				DEEA0CC127BCA8FB003A57E5 /* AppHome */,
 				DE0F302D27BCAB5E00754F6C /* ProfileHome */,
 				DE909EBE27BCBE0300EF95BB /* TransportHomeImp */,
+				DEA8F6FB27BCC6C800919184 /* TopupImp */,
 			);
 			productName = SuperRedApp;
 			productReference = F5829F5526DB2BC400BFA8CD /* MiniSuperApp.app */;
@@ -506,6 +509,10 @@
 		DEA0C8BC27BC9C6800478236 /* TransportHome */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = TransportHome;
+		};
+		DEA8F6FB27BCC6C800919184 /* TopupImp */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = TopupImp;
 		};
 		DEB6DEF127BBA67A0045EBB4 /* AddPaymentMethod */ = {
 			isa = XCSwiftPackageProductDependency;

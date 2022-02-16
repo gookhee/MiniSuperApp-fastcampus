@@ -9,7 +9,7 @@ protocol FinanceHomePresentableListener: AnyObject {
     func listenToScreenDismissed()
 }
 
-final class FinanceHomeViewController: UIViewController, FinanceHomePresentable, FinanceHomeViewControllable, TopupBaseViewControllable {
+final class FinanceHomeViewController: UIViewController, FinanceHomePresentable, FinanceHomeViewControllable {
     
     weak var listener: FinanceHomePresentableListener?
     

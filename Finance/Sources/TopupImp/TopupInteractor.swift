@@ -11,6 +11,7 @@ import CombineUtil
 import FinanceEntity
 import RIBsUtil
 import FoundationExt
+import Topup
 
 protocol TopupRouting: Routing {
     func cleanupViews()
@@ -22,12 +23,6 @@ protocol TopupRouting: Routing {
     func attachCardOnFile(paymentMethods: [PaymentMethod])
     func detachCardOnFile()
     func popToRoot()
-}
-
-public protocol TopupListener: AnyObject {
-    // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
-    func listenToTopupClosed()
-    func listenToTopupFinished()
 }
 
 protocol TopupInteractorDependency {

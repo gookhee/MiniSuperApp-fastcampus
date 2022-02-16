@@ -25,6 +25,10 @@ let package = Package(
             targets: ["Topup"]
         ),
         .library(
+            name: "TopupImp",
+            targets: ["TopupImp"]
+        ),
+        .library(
             name: "FinanceHome",
             targets: ["FinanceHome"]
         ),
@@ -62,6 +66,13 @@ let package = Package(
         .target(
             name: "Topup",
             dependencies: [
+                "ModernRIBs"
+            ]
+        ),
+        .target(
+            name: "TopupImp",
+            dependencies: [
+                "Topup",
                 "ModernRIBs",
                 "FinanceEntity",
                 "FinanceRepository",
