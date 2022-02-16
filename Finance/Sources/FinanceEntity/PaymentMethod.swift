@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import UIKit
 
 /// 서버 응답
 public struct PaymentMethod: Decodable {

@@ -11,6 +11,7 @@
 		DE3BDC6527BC743200EFFC47 /* RIBsUtil in Frameworks */ = {isa = PBXBuildFile; productRef = DE3BDC6427BC743200EFFC47 /* RIBsUtil */; };
 		DE3BDC6727BC7B9300EFFC47 /* SuperUI in Frameworks */ = {isa = PBXBuildFile; productRef = DE3BDC6627BC7B9300EFFC47 /* SuperUI */; };
 		DE3BDC6927BC87C500EFFC47 /* Topup in Frameworks */ = {isa = PBXBuildFile; productRef = DE3BDC6827BC87C500EFFC47 /* Topup */; };
+		DE72C9AF27BCD75E005E6A14 /* AddPaymentMethodImp in Frameworks */ = {isa = PBXBuildFile; productRef = DE72C9AE27BCD75E005E6A14 /* AddPaymentMethodImp */; };
 		DE8DD39C27BC904C004764D9 /* FoundationExt in Frameworks */ = {isa = PBXBuildFile; productRef = DE8DD39B27BC904C004764D9 /* FoundationExt */; };
 		DE8DD39E27BC953F004764D9 /* FinanceHome in Frameworks */ = {isa = PBXBuildFile; productRef = DE8DD39D27BC953F004764D9 /* FinanceHome */; };
 		DE8F92D327BC6B7A0089F6DC /* CombineUtil in Frameworks */ = {isa = PBXBuildFile; productRef = DE8F92D227BC6B7A0089F6DC /* CombineUtil */; };
@@ -61,6 +62,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DE909EBF27BCBE0300EF95BB /* TransportHomeImp in Frameworks */,
+				DE72C9AF27BCD75E005E6A14 /* AddPaymentMethodImp in Frameworks */,
 				DEC1AE42276A0AA60024D730 /* CombineExt in Frameworks */,
 				DEB6DEF227BBA67A0045EBB4 /* AddPaymentMethod in Frameworks */,
 				DE8F92D327BC6B7A0089F6DC /* CombineUtil in Frameworks */,
@@ -186,6 +188,7 @@
 				DE0F302D27BCAB5E00754F6C /* ProfileHome */,
 				DE909EBE27BCBE0300EF95BB /* TransportHomeImp */,
 				DEA8F6FB27BCC6C800919184 /* TopupImp */,
+				DE72C9AE27BCD75E005E6A14 /* AddPaymentMethodImp */,
 			);
 			productName = SuperRedApp;
 			productReference = F5829F5526DB2BC400BFA8CD /* MiniSuperApp.app */;
@@ -481,6 +484,10 @@
 		DE3BDC6827BC87C500EFFC47 /* Topup */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Topup;
+		};
+		DE72C9AE27BCD75E005E6A14 /* AddPaymentMethodImp */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AddPaymentMethodImp;
 		};
 		DE8DD39B27BC904C004764D9 /* FoundationExt */ = {
 			isa = XCSwiftPackageProductDependency;
