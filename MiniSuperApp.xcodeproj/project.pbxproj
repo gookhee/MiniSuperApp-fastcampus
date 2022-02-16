@@ -14,6 +14,8 @@
 		DE8DD39C27BC904C004764D9 /* FoundationExt in Frameworks */ = {isa = PBXBuildFile; productRef = DE8DD39B27BC904C004764D9 /* FoundationExt */; };
 		DE8DD39E27BC953F004764D9 /* FinanceHome in Frameworks */ = {isa = PBXBuildFile; productRef = DE8DD39D27BC953F004764D9 /* FinanceHome */; };
 		DE8F92D327BC6B7A0089F6DC /* CombineUtil in Frameworks */ = {isa = PBXBuildFile; productRef = DE8F92D227BC6B7A0089F6DC /* CombineUtil */; };
+		DE909EBF27BCBE0300EF95BB /* TransportHomeImp in Frameworks */ = {isa = PBXBuildFile; productRef = DE909EBE27BCBE0300EF95BB /* TransportHomeImp */; };
+		DE909EC127BCBF1400EF95BB /* AppRootComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE909EC027BCBF1400EF95BB /* AppRootComponent.swift */; };
 		DE92089727BC655300E2077E /* FinanceEntity in Frameworks */ = {isa = PBXBuildFile; productRef = DE92089627BC655300E2077E /* FinanceEntity */; };
 		DE92089927BC655300E2077E /* FinanceRepository in Frameworks */ = {isa = PBXBuildFile; productRef = DE92089827BC655300E2077E /* FinanceRepository */; };
 		DEA0C8BD27BC9C6800478236 /* TransportHome in Frameworks */ = {isa = PBXBuildFile; productRef = DEA0C8BC27BC9C6800478236 /* TransportHome */; };
@@ -38,6 +40,7 @@
 		DE6D623227B9137700EB5D89 /* Finance */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Finance; sourceTree = "<group>"; };
 		DE6D623327B9138900EB5D89 /* Platform */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Platform; sourceTree = "<group>"; };
 		DE6D623427B913A600EB5D89 /* Profile */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Profile; sourceTree = "<group>"; };
+		DE909EC027BCBF1400EF95BB /* AppRootComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRootComponent.swift; sourceTree = "<group>"; };
 		DEF6C0AF2798FF8E00C0D08E /* miniSuperApp.swiftformat */ = {isa = PBXFileReference; lastKnownFileType = text; path = miniSuperApp.swiftformat; sourceTree = "<group>"; };
 		F57F6AFD26DB4CD700C0117D /* RootTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabBarController.swift; sourceTree = "<group>"; };
 		F5829F5526DB2BC400BFA8CD /* MiniSuperApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MiniSuperApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -56,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE909EBF27BCBE0300EF95BB /* TransportHomeImp in Frameworks */,
 				DEC1AE42276A0AA60024D730 /* CombineExt in Frameworks */,
 				DEB6DEF227BBA67A0045EBB4 /* AddPaymentMethod in Frameworks */,
 				DE8F92D327BC6B7A0089F6DC /* CombineUtil in Frameworks */,
@@ -133,6 +137,7 @@
 				F5829F7226DB34AA00BFA8CD /* AppRootBuilder.swift */,
 				F5829F7326DB34AA00BFA8CD /* AppRootInteractor.swift */,
 				F57F6AFD26DB4CD700C0117D /* RootTabBarController.swift */,
+				DE909EC027BCBF1400EF95BB /* AppRootComponent.swift */,
 			);
 			path = AppRoot;
 			sourceTree = "<group>";
@@ -177,6 +182,7 @@
 				DEA0C8BC27BC9C6800478236 /* TransportHome */,
 				DEEA0CC127BCA8FB003A57E5 /* AppHome */,
 				DE0F302D27BCAB5E00754F6C /* ProfileHome */,
+				DE909EBE27BCBE0300EF95BB /* TransportHomeImp */,
 			);
 			productName = SuperRedApp;
 			productReference = F5829F5526DB2BC400BFA8CD /* MiniSuperApp.app */;
@@ -241,6 +247,7 @@
 				F57F6AFE26DB4CD700C0117D /* RootTabBarController.swift in Sources */,
 				F5829F5926DB2BC400BFA8CD /* AppDelegate.swift in Sources */,
 				F5829F7926DB397300BFA8CD /* AppComponent.swift in Sources */,
+				DE909EC127BCBF1400EF95BB /* AppRootComponent.swift in Sources */,
 				F5829F7426DB34AA00BFA8CD /* AppRootRouter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -483,6 +490,10 @@
 		DE8F92D227BC6B7A0089F6DC /* CombineUtil */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = CombineUtil;
+		};
+		DE909EBE27BCBE0300EF95BB /* TransportHomeImp */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = TransportHomeImp;
 		};
 		DE92089627BC655300E2077E /* FinanceEntity */ = {
 			isa = XCSwiftPackageProductDependency;

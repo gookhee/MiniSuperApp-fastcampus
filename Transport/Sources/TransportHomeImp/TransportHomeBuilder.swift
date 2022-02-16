@@ -2,6 +2,7 @@ import ModernRIBs
 import CombineUtil
 import FinanceRepository
 import Topup
+import TransportHome
 
 public protocol TransportHomeDependency: Dependency {
     var superPayRepository: SuperPayRepositoryAvailable { get }
@@ -26,10 +27,6 @@ final class TransportHomeComponent: Component<TransportHomeDependency>, Transpor
 }
 
 // MARK: - Builder
-
-public protocol TransportHomeBuildable: Buildable {
-    func build(withListener listener: TransportHomeListener) -> ViewableRouting
-}
 
 public final class TransportHomeBuilder: Builder<TransportHomeDependency>, TransportHomeBuildable {
     

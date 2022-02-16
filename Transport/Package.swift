@@ -11,6 +11,9 @@ let package = Package(
         .library(
             name: "TransportHome",
             targets: ["TransportHome"]),
+        .library(
+            name: "TransportHomeImp",
+            targets: ["TransportHomeImp"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -25,6 +28,13 @@ let package = Package(
         .target(
             name: "TransportHome",
             dependencies: [
+                "ModernRIBs"
+            ]
+        ),
+        .target(
+            name: "TransportHomeImp",
+            dependencies: [
+                "TransportHome",
                 "ModernRIBs",
                 .product(name: "FinanceRepository", package: "Finance"),
                 .product(name: "Topup", package: "Finance"),
