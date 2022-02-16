@@ -43,6 +43,7 @@ let package = Package(
         .target(
             name: "RIBsUtil",
             dependencies: [
+                "ModernRIBs"
             ]
         ),
         .target(

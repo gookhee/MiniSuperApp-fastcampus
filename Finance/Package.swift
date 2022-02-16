@@ -24,6 +24,10 @@ let package = Package(
             name: "Topup",
             targets: ["Topup"]
         ),
+        .library(
+            name: "FinanceHome",
+            targets: ["FinanceHome"]
+        ),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -61,9 +65,23 @@ let package = Package(
                 "ModernRIBs",
                 "FinanceEntity",
                 "FinanceRepository",
+                "AddPaymentMethod",
                 .product(name: "RIBsUtil", package: "Platform"),
                 .product(name: "SuperUI", package: "Platform"),
                 .product(name: "FoundationExt", package: "Platform")
+            ]
+        ),
+        .target(
+            name: "FinanceHome",
+            dependencies: [
+                "ModernRIBs",
+                "FinanceEntity",
+                "FinanceRepository",
+                "AddPaymentMethod",
+                "Topup",
+                .product(name: "RIBsUtil", package: "Platform"),
+                .product(name: "SuperUI", package: "Platform"),
+                .product(name: "FoundationExt", package: "Platform"),
             ]
         ),
     ]

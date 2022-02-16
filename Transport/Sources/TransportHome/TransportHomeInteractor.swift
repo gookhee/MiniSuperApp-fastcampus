@@ -15,7 +15,7 @@ protocol TransportHomePresentable: Presentable {
     func setRidePrice(_ ridePrice: String)
 }
 
-protocol TransportHomeListener: AnyObject {
+public protocol TransportHomeListener: AnyObject {
     func transportHomeDidTapClose()
 }
 

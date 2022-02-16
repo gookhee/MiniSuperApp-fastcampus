@@ -33,11 +33,11 @@ public protocol TransportHomeBuildable: Buildable {
 
 public final class TransportHomeBuilder: Builder<TransportHomeDependency>, TransportHomeBuildable {
     
-    override init(dependency: TransportHomeDependency) {
+    public override init(dependency: TransportHomeDependency) {
         super.init(dependency: dependency)
     }
     
-    func build(withListener listener: TransportHomeListener) -> ViewableRouting {
+    public func build(withListener listener: TransportHomeListener) -> ViewableRouting {
         let viewController = TransportHomeViewController()
         let component = TransportHomeComponent(
             dependency: dependency,
