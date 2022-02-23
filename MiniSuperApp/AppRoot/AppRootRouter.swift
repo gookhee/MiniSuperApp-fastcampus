@@ -1,4 +1,5 @@
 import ModernRIBs
+import RIBsExt
 
 protocol AppRootInteractable: Interactable,
     AppHomeListener,

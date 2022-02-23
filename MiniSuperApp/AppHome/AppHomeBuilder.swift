@@ -1,4 +1,5 @@
 import ModernRIBs
+import FinanceRepository
 
 protocol AppHomeDependency: Dependency {
     var superPayRepository: SuperPayRepositoryAvailable { get }
