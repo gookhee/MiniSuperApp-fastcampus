@@ -81,13 +81,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		F57F6AFF26DB585100C0117D /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Utils;
-			sourceTree = "<group>";
-		};
 		F5829F4C26DB2BC400BFA8CD = {
 			isa = PBXGroup;
 			children = (
@@ -116,7 +109,6 @@
 			children = (
 				F5829F7A26DB3AF900BFA8CD /* AppDelegate */,
 				F5829F6F26DB33CF00BFA8CD /* AppRoot */,
-				F57F6AFF26DB585100C0117D /* Utils */,
 				F5829F6126DB2BC500BFA8CD /* Assets.xcassets */,
 				F5829F6326DB2BC500BFA8CD /* LaunchScreen.storyboard */,
 				F5829F6626DB2BC500BFA8CD /* Info.plist */,
