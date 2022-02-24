@@ -12,6 +12,9 @@ let package = Package(
             name: "TransportHome",
             targets: ["TransportHome"]),
         .library(
+            name: "TransportHomeImp",
+            targets: ["TransportHomeImp"]),
+        .library(
             name: "AppHome",
             targets: ["AppHome"]),
     ],
@@ -28,6 +31,16 @@ let package = Package(
         .target(
             name: "TransportHome",
             dependencies: [
+                "ModernRIBs",
+            ],
+            resources: [
+                .process("Resource")
+            ]
+        ),
+        .target(
+            name: "TransportHomeImp",
+            dependencies: [
+                "TransportHome",
                 "ModernRIBs",
                 .product(name: "FinanceRepository", package: "Finance"),
                 .product(name: "Topup", package: "Finance")
