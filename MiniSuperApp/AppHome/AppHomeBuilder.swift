@@ -1,5 +1,6 @@
 import ModernRIBs
 import FinanceRepository
+import TransportHome
 
 protocol AppHomeDependency: Dependency {
     var superPayRepository: SuperPayRepositoryAvailable { get }
