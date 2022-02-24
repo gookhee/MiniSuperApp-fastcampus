@@ -20,6 +20,9 @@ let package = Package(
         .library(
             name: "Topup",
             targets: ["Topup"]),
+        .library(
+            name: "FinanceHome",
+            targets: ["FinanceHome"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -60,6 +63,17 @@ let package = Package(
                 .product(name: "CombineUtil", package: "Platform"),
                 .product(name: "FoundationExt", package: "Platform"),
                 .product(name: "RIBsExt", package: "Platform"),
+            ]),
+        .target(
+            name: "FinanceHome",
+            dependencies: [
+                "ModernRIBs",
+                "FinanceRepository",
+                "AddPaymentMethod",
+                "FinanceEntity",
+                "Topup",
+                .product(name: "RIBsExt", package: "Platform"),
+                .product(name: "FoundationExt", package: "Platform"),
             ]),
     ]
 )

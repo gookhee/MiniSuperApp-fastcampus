@@ -7,6 +7,8 @@
 
 import ModernRIBs
 import Combine
+import FinanceEntity
+import FinanceRepository
 
 protocol AddPaymentMethodRouting: ViewableRouting {
     // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
