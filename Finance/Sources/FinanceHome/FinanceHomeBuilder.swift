@@ -9,16 +9,19 @@ public protocol FinanceHomeDependency: Dependency {
     // created by this RIB.
     var superPayRepository: SuperPayRepositoryAvailable { get }
     var cardOnFileRepository: CardOnFileRepositoryAvailable { get }
+    var topupBuildable: TopupBuildable { get }
 }
 
 /// 자식리블렛의 의존성을 여기서 충족시켜줘야함
-final class FinanceHomeComponent: Component<FinanceHomeDependency>, SuperPayDashboardDependency, CardOnFileDashboardDependency, AddPaymentMethodDependency, TopupDependency {
+final class FinanceHomeComponent: Component<FinanceHomeDependency>, SuperPayDashboardDependency, CardOnFileDashboardDependency, AddPaymentMethodDependency {
     var topupBaseViewController: TopupBaseViewControllable
     var cardOnFileRepository: CardOnFileRepositoryAvailable { dependency.cardOnFileRepository }
     var superPayRepository: SuperPayRepositoryAvailable { dependency.superPayRepository }
 
     /// 자식리블렛에서는 값을 읽기전용 타입을 넘김
     var balance: ReadOnlyCurrentValuePublisher<Double> { superPayRepository.balance }
+    
+    var topupBuildable: TopupBuildable { dependency.topupBuildable }
 
     init(
         dependency: FinanceHomeDependency,
@@ -53,14 +56,14 @@ public final class FinanceHomeBuilder: Builder<FinanceHomeDependency>, FinanceHo
         let superPayDashboardBuilder = SuperPayDashboardBuilder(dependency: component)
         let cardOnFileDashboardBuilder = CardOnFileDashboardBuilder(dependency: component)
         let addPaymentMethodBuilder = AddPaymentMethodBuilder(dependency: component)
-        let topupBuildable = TopupBuilder(dependency: component)
+
         return FinanceHomeRouter(
             interactor: interactor,
             viewController: viewController,
             superPayDashboardBuildable: superPayDashboardBuilder,
             cardOnFileDashboardBuildable: cardOnFileDashboardBuilder,
             addPaymentMethodBuildable: addPaymentMethodBuilder,
-            topupBuildable: topupBuildable
+            topupBuildable: component.topupBuildable
         )
     }
 }

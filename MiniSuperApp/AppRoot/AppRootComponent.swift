@@ -13,13 +13,19 @@ import AppHome
 import ProfileHome
 import TransportHome
 import TransportHomeImp
+import Topup
+import TopupImp
 
-final class AppRootComponent: Component<AppRootDependency>, AppHomeDependency, FinanceHomeDependency, ProfileHomeDependency, TransportHomeDependency  {
+final class AppRootComponent: Component<AppRootDependency>, AppHomeDependency, FinanceHomeDependency, ProfileHomeDependency, TransportHomeDependency, TopupDependency  {
     let superPayRepository: SuperPayRepositoryAvailable
     let cardOnFileRepository: CardOnFileRepositoryAvailable
     
     lazy var transportHomeBuildable: TransportHomeBuildable = {
         TransportHomeBuilder(dependency: self)
+    }()
+    
+    lazy var topupBuildable: TopupBuildable = {
+        TopupBuilder(dependency: self)
     }()
     
     init(

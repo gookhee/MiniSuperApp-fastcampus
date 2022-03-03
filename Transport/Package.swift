@@ -43,10 +43,11 @@ let package = Package(
                 "TransportHome",
                 "ModernRIBs",
                 .product(name: "FinanceRepository", package: "Finance"),
-                .product(name: "Topup", package: "Finance")
+                .product(name: "Topup", package: "Finance"),
+                .product(name: "SuperUI", package: "Platform"),
             ],
             resources: [
-                .process("Resource")
+                .process("Resource"),
             ]
         ),
         .target(

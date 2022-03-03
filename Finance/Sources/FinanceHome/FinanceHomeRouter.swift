@@ -9,7 +9,7 @@ protocol FinanceHomeInteractable: Interactable, SuperPayDashboardListener, CardO
     var listener: FinanceHomeListener? { get set }
 }
 
-protocol FinanceHomeViewControllable: ViewControllable {
+protocol FinanceHomeViewControllable: TopupBaseViewControllable {
     // TODO: Declare methods the router invokes to manipulate the view hierarchy.
     var presentationDelegate: UIAdaptivePresentationControllerDelegate { get }
     
@@ -102,7 +102,10 @@ final class FinanceHomeRouter: ViewableRouter<FinanceHomeInteractable, FinanceHo
     func attachTopup() {
         guard nil == topupRouting else { return }
         
-        let router = topupBuildable.build(withListener: interactor)
+        let router = topupBuildable.build(
+            withListener: interactor,
+            topupBaseViewController: viewController
+        )
         
         attachChild(router)
         topupRouting = router

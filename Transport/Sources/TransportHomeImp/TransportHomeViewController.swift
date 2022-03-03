@@ -8,7 +8,7 @@ protocol TransportHomePresentableListener: AnyObject {
     func listenToScreenDismissed()
 }
 
-final class TransportHomeViewController: UIViewController, TransportHomePresentable, TransportHomeViewControllable, TopupBaseViewControllable {
+final class TransportHomeViewController: UIViewController, TransportHomePresentable, TransportHomeViewControllable {
     var presentationDelegate: UIAdaptivePresentationControllerDelegate { self }
     
     weak var listener: TransportHomePresentableListener?
