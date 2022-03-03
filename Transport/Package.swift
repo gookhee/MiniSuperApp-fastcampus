@@ -53,6 +53,7 @@ let package = Package(
             name: "AppHome",
             dependencies: [
                 "ModernRIBs",
+                "TransportHome",
                 .product(name: "FinanceRepository", package: "Finance"),
                 .product(name: "SuperUI", package: "Platform")
             ]),
