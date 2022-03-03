@@ -18,14 +18,17 @@ public protocol TopupDependency: Dependency {
     // created by this RIB.
     var cardOnFileRepository: CardOnFileRepositoryAvailable { get }
     var superPayRepository: SuperPayRepositoryAvailable { get }
+    var addPaymentMethodBuildable: AddPaymentMethodBuildable { get }
 }
 
-final class TopupComponent: Component<TopupDependency>, TopupInteractorDependency, AddPaymentMethodDependency, EnterAmountDependency, CardOnFileDependency {
+final class TopupComponent: Component<TopupDependency>, TopupInteractorDependency, EnterAmountDependency, CardOnFileDependency {
     var superPayRepository: SuperPayRepositoryAvailable { dependency.superPayRepository }
     var cardOnFileRepository: CardOnFileRepositoryAvailable { dependency.cardOnFileRepository }
     var selectedPaymentMethod: ReadOnlyCurrentValuePublisher<PaymentMethod> { paymentMethodStream }
 
     let paymentMethodStream: CurrentValuePublisher<PaymentMethod>
+    
+    var addPaymentMethodBuildable: AddPaymentMethodBuildable { dependency.addPaymentMethodBuildable }
 
     init(
         dependency: TopupDependency,
@@ -54,14 +57,13 @@ public final class TopupBuilder: Builder<TopupDependency>, TopupBuildable {
         let component = TopupComponent(dependency: dependency, paymentMethodStream: paymentMethodStream)
         let interactor = TopupInteractor(dependency: component)
         interactor.listener = listener
-        let addPaymentMethodBuilder = AddPaymentMethodBuilder(dependency: component)
         let enterAmountBuilder = EnterAmountBuilder(dependency: component)
         let cardOnFileBuilder = CardOnFileBuilder(dependency: component)
 
         return TopupRouter(
             interactor: interactor,
             viewController: topupBaseViewController,
-            addPaymentMethodBuildable: addPaymentMethodBuilder,
+            addPaymentMethodBuildable: component.addPaymentMethodBuildable,
             enterAmountBuildable: enterAmountBuilder,
             cardOnFileBuildable: cardOnFileBuilder
         )

@@ -8,8 +8,9 @@
 import ModernRIBs
 import FinanceRepository
 import RIBsExt
+import AddPaymentMethod
 
-protocol AddPaymentMethodDependency: Dependency {
+public protocol AddPaymentMethodDependency: Dependency {
     // TODO: Declare the set of dependencies required by this RIB, but cannot be
     // created by this RIB.
     var cardOnFileRepository: CardOnFileRepositoryAvailable { get }
@@ -22,23 +23,16 @@ final class AddPaymentMethodComponent: Component<AddPaymentMethodDependency>, Ad
 
 // MARK: - Builder
 
-protocol AddPaymentMethodBuildable: Buildable {
-    func build(
-        withListener listener: AddPaymentMethodListener,
-        closeButtonType: DismissButtonType
-    ) -> AddPaymentMethodRouting
-}
+public final class AddPaymentMethodBuilder: Builder<AddPaymentMethodDependency>, AddPaymentMethodBuildable {
 
-final class AddPaymentMethodBuilder: Builder<AddPaymentMethodDependency>, AddPaymentMethodBuildable {
-
-    override init(dependency: AddPaymentMethodDependency) {
+    public override init(dependency: AddPaymentMethodDependency) {
         super.init(dependency: dependency)
     }
 
-    func build(
+    public func build(
         withListener listener: AddPaymentMethodListener,
         closeButtonType: DismissButtonType
-    ) -> AddPaymentMethodRouting {
+    ) -> ViewableRouting {
         let component = AddPaymentMethodComponent(dependency: dependency)
         let viewController = AddPaymentMethodViewController(closeButtonType: closeButtonType)
         let interactor = AddPaymentMethodInteractor(

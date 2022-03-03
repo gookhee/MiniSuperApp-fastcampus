@@ -10,10 +10,11 @@ public protocol FinanceHomeDependency: Dependency {
     var superPayRepository: SuperPayRepositoryAvailable { get }
     var cardOnFileRepository: CardOnFileRepositoryAvailable { get }
     var topupBuildable: TopupBuildable { get }
+    var addPaymentMethodBuildable: AddPaymentMethodBuildable { get }
 }
 
 /// 자식리블렛의 의존성을 여기서 충족시켜줘야함
-final class FinanceHomeComponent: Component<FinanceHomeDependency>, SuperPayDashboardDependency, CardOnFileDashboardDependency, AddPaymentMethodDependency {
+final class FinanceHomeComponent: Component<FinanceHomeDependency>, SuperPayDashboardDependency, CardOnFileDashboardDependency {
     var topupBaseViewController: TopupBaseViewControllable
     var cardOnFileRepository: CardOnFileRepositoryAvailable { dependency.cardOnFileRepository }
     var superPayRepository: SuperPayRepositoryAvailable { dependency.superPayRepository }
@@ -22,6 +23,8 @@ final class FinanceHomeComponent: Component<FinanceHomeDependency>, SuperPayDash
     var balance: ReadOnlyCurrentValuePublisher<Double> { superPayRepository.balance }
     
     var topupBuildable: TopupBuildable { dependency.topupBuildable }
+    
+    var addPaymentMethodBuildable: AddPaymentMethodBuildable { dependency.addPaymentMethodBuildable }
 
     init(
         dependency: FinanceHomeDependency,
@@ -55,14 +58,13 @@ public final class FinanceHomeBuilder: Builder<FinanceHomeDependency>, FinanceHo
 
         let superPayDashboardBuilder = SuperPayDashboardBuilder(dependency: component)
         let cardOnFileDashboardBuilder = CardOnFileDashboardBuilder(dependency: component)
-        let addPaymentMethodBuilder = AddPaymentMethodBuilder(dependency: component)
-
+        
         return FinanceHomeRouter(
             interactor: interactor,
             viewController: viewController,
             superPayDashboardBuildable: superPayDashboardBuilder,
             cardOnFileDashboardBuildable: cardOnFileDashboardBuilder,
-            addPaymentMethodBuildable: addPaymentMethodBuilder,
+            addPaymentMethodBuildable: component.addPaymentMethodBuildable,
             topupBuildable: component.topupBuildable
         )
     }
