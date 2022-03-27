@@ -12,13 +12,13 @@ protocol FinanceHomeInteractable: Interactable, SuperPayDashboardListener, CardO
 
 protocol FinanceHomeViewControllable: ViewControllable, TopupBaseViewControllable {
     // TODO: Declare methods the router invokes to manipulate the view hierarchy.
-    func addDashboard(_ view: ViewControllable)
+    func addDashboard(_ view: UIViewController)
 }
 
 final class FinanceHomeRouter: ViewableRouter<FinanceHomeInteractable, FinanceHomeViewControllable>, FinanceHomeRouting {
     
-    private let superPayDashboardBuildable: SuperPayDashboardBuildable
-    private var superPayRouting: Routing?
+    private let superPayDashboardBuildable: SuperPayDashboardBuildingLogic
+    private var superPayRouting: UIViewController?
     
     private let cardOnFileDashboardBuildable: CardOnFileDashboardBuildable
     private var cardOnFileRouting: Routing?
@@ -34,7 +34,7 @@ final class FinanceHomeRouter: ViewableRouter<FinanceHomeInteractable, FinanceHo
     init(
         interactor: FinanceHomeInteractable,
         viewController: FinanceHomeViewControllable,
-        superPayDashboardBuildable: SuperPayDashboardBuildable,
+        superPayDashboardBuildable: SuperPayDashboardBuildingLogic,
         cardOnFileDashboardBuildable: CardOnFileDashboardBuildable,
         addPaymentMethodBuildable: AddPaymentMethodBuildingLogic,
         topupBuildable: TopupBuildingLogic
@@ -51,15 +51,11 @@ final class FinanceHomeRouter: ViewableRouter<FinanceHomeInteractable, FinanceHo
         if superPayRouting != nil {
             return
         }
-        let router = superPayDashboardBuildable.build(withListener: interactor)
+        let destination = superPayDashboardBuildable.build(withListener: interactor)
         
-        let dashboard = router.viewControllable
+        viewController.addDashboard(destination)
         
-        viewController.addDashboard(dashboard)
-        
-        self.superPayRouting = router
-        attachChild(router)
-        
+        self.superPayRouting = destination
     }
     
     func attachCardOnFileDashboard() {
@@ -70,7 +66,7 @@ final class FinanceHomeRouter: ViewableRouter<FinanceHomeInteractable, FinanceHo
         
         let dashboard = router.viewControllable
         
-        viewController.addDashboard(dashboard)
+        viewController.addDashboard(dashboard.uiviewController)
         
         self.cardOnFileRouting = router
         attachChild(router)

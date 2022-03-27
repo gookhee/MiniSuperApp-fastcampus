@@ -51,12 +51,10 @@ final class FinanceHomeViewController: UIViewController, FinanceHomePresentable,
     ])
     }
     
-    func addDashboard(_ view: ViewControllable) {
-        let vc = view.uiviewController
-        
-        addChild(vc)
-        stackView.addArrangedSubview(vc.view)
-        vc.didMove(toParent: self)
+    func addDashboard(_ viewController: UIViewController) {
+        addChild(viewController)
+        stackView.addArrangedSubview(viewController.view)
+        viewController.didMove(toParent: self)
     }
 }
 

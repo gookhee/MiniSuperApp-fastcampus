@@ -107,6 +107,7 @@ let package = Package(
                 .product(name: "RIBsUtil", package: "Platform"),
                 .product(name: "SuperUI", package: "Platform"),
                 .product(name: "FoundationExt", package: "Platform"),
+                .product(name: "CleanSwiftUtil", package: "Platform"),
             ]
         ),
     ]
