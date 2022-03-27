@@ -10,7 +10,7 @@ public protocol FinanceHomeDependency: Dependency {
     // created by this RIB.
     var superPayRepository: SuperPayRepositoryAvailable { get }
     var cardOnFileRepository: CardOnFileRepositoryAvailable { get }
-    var topupBuildable: TopupBuildable { get }
+    var topupBuildable: TopupBuildingLogic { get }
     var addPaymentMethodBuildable: AddPaymentMethodBuildingLogic { get }
 }
 
@@ -18,7 +18,7 @@ public protocol FinanceHomeDependency: Dependency {
 final class FinanceHomeComponent: Component<FinanceHomeDependency>, SuperPayDashboardDependency, CardOnFileDashboardDependency {
     var cardOnFileRepository: CardOnFileRepositoryAvailable { dependency.cardOnFileRepository }
     var superPayRepository: SuperPayRepositoryAvailable { dependency.superPayRepository }
-    var topupBuildable: TopupBuildable { dependency.topupBuildable }
+    var topupBuildable: TopupBuildingLogic { dependency.topupBuildable }
     var addPaymentMethodBuildable: AddPaymentMethodBuildingLogic { dependency.addPaymentMethodBuildable }
 
     /// 자식리블렛에서는 값을 읽기전용 타입을 넘김

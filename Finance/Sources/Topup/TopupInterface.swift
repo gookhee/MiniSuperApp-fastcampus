@@ -6,15 +6,19 @@
 //
 
 import Foundation
-import ModernRIBs
 import UIKit
 
+import CleanSwiftUtil
 
-public protocol TopupBuildable: Buildable {
+// MARK: - TopupBuildingLogic definition
+
+public protocol TopupBuildingLogic: Buildable {
+    typealias Destination = ViewlessInteracting
+    
     func build(
         withListener listener: TopupListener,
         topupBaseViewController: TopupBaseViewControllable
-    ) -> Routing
+    ) -> Destination
 }
 
 public protocol TopupListener: AnyObject {
@@ -23,7 +27,7 @@ public protocol TopupListener: AnyObject {
     func listenToTopupFinished()
 }
 
-public protocol TopupBaseViewControllable: ViewControllable {
+public protocol TopupBaseViewControllable: UIViewController {
     // TODO: Declare methods the router invokes to manipulate the view hierarchy. Since
     // this RIB does not own its own view, this protocol is conformed to by one of this
     // RIB's ancestor RIBs' view.

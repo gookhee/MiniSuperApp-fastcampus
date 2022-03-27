@@ -3,13 +3,14 @@ import UIKit
 import AddPaymentMethod
 import Topup
 import RIBsUtil
+import CleanSwiftUtil
 
 protocol FinanceHomeInteractable: Interactable, SuperPayDashboardListener, CardOnFileDashboardListener, AddPaymentMethodListener, TopupListener {
     var router: FinanceHomeRouting? { get set }
     var listener: FinanceHomeListener? { get set }
 }
 
-protocol FinanceHomeViewControllable: TopupBaseViewControllable {
+protocol FinanceHomeViewControllable: ViewControllable, TopupBaseViewControllable {
     // TODO: Declare methods the router invokes to manipulate the view hierarchy.
     func addDashboard(_ view: ViewControllable)
 }
@@ -25,8 +26,8 @@ final class FinanceHomeRouter: ViewableRouter<FinanceHomeInteractable, FinanceHo
     private let addPaymentMethodBuildable: AddPaymentMethodBuildingLogic
     private var addPaymentMethodRouting: UIViewController?
     
-    private let topupBuildable: TopupBuildable
-    private var topupRouting: Routing?
+    private let topupBuildable: TopupBuildingLogic
+    private var topupRouting: ViewlessInteracting?
     
     /// !!! router가 interacter를 주입받는다.
     // TODO: Constructor inject child builder protocols to allow building children.
@@ -36,7 +37,7 @@ final class FinanceHomeRouter: ViewableRouter<FinanceHomeInteractable, FinanceHo
         superPayDashboardBuildable: SuperPayDashboardBuildable,
         cardOnFileDashboardBuildable: CardOnFileDashboardBuildable,
         addPaymentMethodBuildable: AddPaymentMethodBuildingLogic,
-        topupBuildable: TopupBuildable
+        topupBuildable: TopupBuildingLogic
     ) {
         self.superPayDashboardBuildable = superPayDashboardBuildable
         self.cardOnFileDashboardBuildable = cardOnFileDashboardBuildable
@@ -87,15 +88,15 @@ final class FinanceHomeRouter: ViewableRouter<FinanceHomeInteractable, FinanceHo
         navigationController.navigationBar.scrollEdgeAppearance = navigationController.navigationBar.standardAppearance
  
         navigationController.presentationController?.delegate = viewController.presentationDelegate
-        viewController.uiviewController.present(navigationController, animated: true, completion: nil)
+        viewController.present(navigationController, animated: true, completion: nil)
         
         addPaymentMethodRouting = destination
     }
     
     func detachAddPaymentMethod() {
-        guard let router = addPaymentMethodRouting else { return }
+        guard nil != addPaymentMethodRouting else { return }
         
-        viewController.uiviewController.dismiss(animated: true, completion: nil)
+        viewController.dismiss(animated: true, completion: nil)
         
         addPaymentMethodRouting = nil
     }
@@ -103,18 +104,20 @@ final class FinanceHomeRouter: ViewableRouter<FinanceHomeInteractable, FinanceHo
     func attachTopup() {
         guard nil == topupRouting else { return }
         
-        let router = topupBuildable.build(
+        let destination = topupBuildable.build(
             withListener: interactor,
             topupBaseViewController: viewController
         )
         
-        attachChild(router)
-        topupRouting = router
+        destination.activate()
+        
+        topupRouting = destination
     }
     
     func detachTopup() {
-        guard let router = topupRouting else { return }
-        detachChild(router)
+        guard nil != topupRouting else { return }
+        
+        topupRouting?.deactivate()
         topupRouting = nil
     }
 }

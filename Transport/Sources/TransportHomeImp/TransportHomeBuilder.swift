@@ -7,7 +7,7 @@ import TransportHome
 public protocol TransportHomeDependency: Dependency {
     var superPayRepository: SuperPayRepositoryAvailable { get }
     var cardOnFileRepository: CardOnFileRepositoryAvailable { get }
-    var topupBuildable: TopupBuildable { get }
+    var topupBuildable: TopupBuildingLogic { get }
 }
 
 final class TransportHomeComponent: Component<TransportHomeDependency>, TransportHomeInteractorDependency {
@@ -15,7 +15,7 @@ final class TransportHomeComponent: Component<TransportHomeDependency>, Transpor
     
     var superPayRepository: SuperPayRepositoryAvailable { dependency.superPayRepository }
     var superPayBalance: ReadOnlyCurrentValuePublisher<Double> { dependency.superPayRepository.balance }
-    var topupBuildable: TopupBuildable { dependency.topupBuildable }
+    var topupBuildable: TopupBuildingLogic { dependency.topupBuildable }
 }
 
 // MARK: - Builder

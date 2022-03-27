@@ -31,10 +31,7 @@ public final class AddPaymentMethodBuilder: Builder<AddPaymentMethodDependency>,
         )
         interactor.router = AddPaymentMethodRouter(viewController: viewController)
         viewController.interactor = interactor
-        let presenter = AddPaymentMethodPresenter()
-        presenter.viewController = viewController
-        interactor.presenter = AddPaymentMethodPresenter()
-        
+
         return viewController
     }
 }

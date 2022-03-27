@@ -27,7 +27,7 @@ final class AppRootComponent: Component<AppRootDependency>, AppHomeDependency, F
        TransportHomeBuilder(dependency: self)
     }()
     
-    lazy var topupBuildable: TopupBuildable = {
+    lazy var topupBuildable: TopupBuildingLogic = {
        TopupBuilder(dependency: self)
     }()
     

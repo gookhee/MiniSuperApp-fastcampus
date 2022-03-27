@@ -1,6 +1,9 @@
+import UIKit
+
 import ModernRIBs
 import Topup
 import TransportHome
+import CleanSwiftUtil
 
 protocol TransportHomeInteractable: Interactable, TopupListener {
     var router: TransportHomeRouting? { get set }
@@ -13,13 +16,13 @@ protocol TransportHomeViewControllable: ViewControllable, TopupBaseViewControlla
 
 final class TransportHomeRouter: ViewableRouter<TransportHomeInteractable, TransportHomeViewControllable>, TransportHomeRouting {
     
-    private let topupBuildable: TopupBuildable
-    private var topupRouting: Routing?
+    private let topupBuildable: TopupBuildingLogic
+    private var topupRouting: ViewlessInteracting?
     
     init(
         interactor: TransportHomeInteractable,
         viewController: TransportHomeViewControllable,
-        topupBuildable: TopupBuildable
+        topupBuildable: TopupBuildingLogic
     ) {
         self.topupBuildable = topupBuildable
         super.init(interactor: interactor, viewController: viewController)
@@ -29,18 +32,20 @@ final class TransportHomeRouter: ViewableRouter<TransportHomeInteractable, Trans
     func attachTopup() {
         guard nil == topupRouting else { return }
         
-        let router = topupBuildable.build(
+        let destination = topupBuildable.build(
             withListener: interactor,
             topupBaseViewController: viewController
         )
         
-        attachChild(router)
-        topupRouting = router
+        topupRouting = destination
+        
+        destination.activate()
     }
     
     func detachTopup() {
-        guard let router = topupRouting else { return }
-        detachChild(router)
+        guard nil != topupRouting else { return }
+        
+        topupRouting?.deactivate()
         topupRouting = nil
     }
     
