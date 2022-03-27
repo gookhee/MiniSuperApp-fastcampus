@@ -1,19 +1,9 @@
 import UIKit
 import FinanceEntity
 
-struct SelectedPaymentMethodViewModel {
-    let image: UIImage?
-    let name: String
-    
-    init(_ paymentMethod: PaymentMethod) {
-        image = UIColor(hex: paymentMethod.color).flatMap { UIImage(color: $0) }
-        name = "\(paymentMethod.name) \(paymentMethod.digits)"
-    }
-}
-
 final class SelectedPaymentMethodView: UIView {
     
-    func update(with viewModel: SelectedPaymentMethodViewModel) {
+    func update(with viewModel: EnterAmount.ViewModel.SelectedPaymentMethod) {
         self.thumbnailView.image = viewModel.image
         self.nameLabel.text = viewModel.name
     }

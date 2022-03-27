@@ -32,7 +32,6 @@ final class CardOnFileInteractor {
 // MARK: - CardOnFileRequestLogic
 
 extension CardOnFileInteractor: CardOnFileRequestLogic {
-    
     func process(_ request: CardOnFile.Request.OnLoad) {
         presenter?.present(.list(items: paymentMethods))
     }
@@ -48,7 +47,6 @@ extension CardOnFileInteractor: CardOnFileRequestLogic {
     func process(_ request: CardOnFile.Request.OnClose) {
         listener?.listenToCloseButtonTappedFromCardOnFile()
     }
-    
 }
 
 // MARK: - CardOnFileRequestLogic definition

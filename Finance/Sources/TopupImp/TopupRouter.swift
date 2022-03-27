@@ -23,8 +23,8 @@ final class TopupRouter: Router<TopupInteractable>, TopupRouting {
     private let addPaymentMethodBuildable: AddPaymentMethodBuildingLogic
     private var addPaymentMethodRouting: UIViewController?
     
-    private let enterAmountBuildable: EnterAmountBuildable
-    private var enterAmountRouting: Routing?
+    private let enterAmountBuildable: EnterAmountBuildingLogic
+    private var enterAmountRouting: UIViewController?
     
     private let cardOnFileBuildable: CardOnFileBuildingLogic
     private var cardOnFileRouting: UIViewController?
@@ -34,7 +34,7 @@ final class TopupRouter: Router<TopupInteractable>, TopupRouting {
         interactor: TopupInteractable,
         viewController: TopupBaseViewControllable,
         addPaymentMethodBuildable: AddPaymentMethodBuildingLogic,
-        enterAmountBuildable: EnterAmountBuildable,
+        enterAmountBuildable: EnterAmountBuildingLogic,
         cardOnFileBuildable: CardOnFileBuildingLogic
     ) {
         self.viewController = viewController
@@ -85,27 +85,25 @@ final class TopupRouter: Router<TopupInteractable>, TopupRouting {
     func attachEnterAmount() {
         guard nil == enterAmountRouting else { return }
         
-        let router = enterAmountBuildable.build(withListener: interactor)
+        let viewController = enterAmountBuildable.build(withListener: interactor)
         
         if let navigationController = navigationController {
             /// 첫화면 카드 추가 -> 카드 추가 후
-            navigationController.setViewControllers([router.viewControllable.uiviewController], animated: true)
+            navigationController.setViewControllers([viewController], animated: true)
             resetChildRouting()
         } else {
             /// 첫 화면이 충전하기
-            presentInsideNavigation(router.viewControllable.uiviewController)
+            presentInsideNavigation(viewController)
         }
         
-        enterAmountRouting = router
-        attachChild(router)
+        enterAmountRouting = viewController
     }
     
     func detachEnterAmount() {
-        guard let router = enterAmountRouting else { return }
+        guard nil != enterAmountRouting else { return }
         
         dismissPresentedNavigation(completion: nil)
         
-        detachChild(router)
         enterAmountRouting = nil
     }
     
