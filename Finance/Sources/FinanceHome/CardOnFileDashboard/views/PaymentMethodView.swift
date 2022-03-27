@@ -27,7 +27,7 @@ final class PaymentMethodView: UIView {
         return label
     }()
     
-    init(viewModel: PaymentMethodViewModel) {
+    init(viewModel: CardOnFileDashboard.ViewModel.Item) {
         super.init(frame: .zero)
         
         setupViews()

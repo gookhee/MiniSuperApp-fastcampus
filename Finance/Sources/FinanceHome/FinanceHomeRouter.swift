@@ -20,8 +20,8 @@ final class FinanceHomeRouter: ViewableRouter<FinanceHomeInteractable, FinanceHo
     private let superPayDashboardBuildable: SuperPayDashboardBuildingLogic
     private var superPayRouting: UIViewController?
     
-    private let cardOnFileDashboardBuildable: CardOnFileDashboardBuildable
-    private var cardOnFileRouting: Routing?
+    private let cardOnFileDashboardBuildable: CardOnFileDashboardBuildingLogic
+    private var cardOnFileRouting: UIViewController?
     
     private let addPaymentMethodBuildable: AddPaymentMethodBuildingLogic
     private var addPaymentMethodRouting: UIViewController?
@@ -35,7 +35,7 @@ final class FinanceHomeRouter: ViewableRouter<FinanceHomeInteractable, FinanceHo
         interactor: FinanceHomeInteractable,
         viewController: FinanceHomeViewControllable,
         superPayDashboardBuildable: SuperPayDashboardBuildingLogic,
-        cardOnFileDashboardBuildable: CardOnFileDashboardBuildable,
+        cardOnFileDashboardBuildable: CardOnFileDashboardBuildingLogic,
         addPaymentMethodBuildable: AddPaymentMethodBuildingLogic,
         topupBuildable: TopupBuildingLogic
     ) {
@@ -62,15 +62,11 @@ final class FinanceHomeRouter: ViewableRouter<FinanceHomeInteractable, FinanceHo
         if cardOnFileRouting != nil {
             return
         }
-        let router = cardOnFileDashboardBuildable.build(withListener: interactor)
+        let destination = cardOnFileDashboardBuildable.build(withListener: interactor)
         
-        let dashboard = router.viewControllable
+        viewController.addDashboard(destination)
         
-        viewController.addDashboard(dashboard.uiviewController)
-        
-        self.cardOnFileRouting = router
-        attachChild(router)
-        
+        self.cardOnFileRouting = destination
     }
     
     func attachAddPaymentMethod() {
