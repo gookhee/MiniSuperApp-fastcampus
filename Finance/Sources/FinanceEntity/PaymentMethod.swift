@@ -8,7 +8,7 @@
 import Foundation
 
 /// 서버 응답
-public struct PaymentMethod: Decodable {
+public struct PaymentMethod: Decodable, Equatable {
     public let id: String
     public let name: String
     public let digits: String
