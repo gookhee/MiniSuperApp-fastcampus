@@ -24,6 +24,10 @@ let package = Package(
             name: "FoundationExt",
             targets: ["FoundationExt"]
         ),
+        .library(
+            name: "CleanSwiftUtil",
+            targets: ["CleanSwiftUtil"]
+        ),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -56,6 +60,11 @@ let package = Package(
             name: "FoundationExt",
             dependencies: [
             ]
-        )
+        ),
+        .target(
+            name: "CleanSwiftUtil",
+            dependencies: [
+            ]
+        ),
     ]
 )

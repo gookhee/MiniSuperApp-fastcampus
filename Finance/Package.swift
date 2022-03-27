@@ -49,19 +49,20 @@ let package = Package(
         .target(
             name: "AddPaymentMethod",
             dependencies: [
-                "ModernRIBs",
                 "FinanceEntity",
                 .product(name: "RIBsUtil", package: "Platform"),
+                .product(name: "CleanSwiftUtil", package: "Platform"),
             ]
         ),
         .target(
             name: "AddPaymentMethodImp",
             dependencies: [
-                "ModernRIBs",
+                "AddPaymentMethod",
                 "FinanceEntity",
                 "FinanceRepository",
                 .product(name: "RIBsUtil", package: "Platform"),
-                .product(name: "SuperUI", package: "Platform")
+                .product(name: "SuperUI", package: "Platform"),
+                .product(name: "CleanSwiftUtil", package: "Platform"),
             ]
         ),
         .target(
@@ -91,7 +92,8 @@ let package = Package(
                 "AddPaymentMethod",
                 .product(name: "RIBsUtil", package: "Platform"),
                 .product(name: "SuperUI", package: "Platform"),
-                .product(name: "FoundationExt", package: "Platform")
+                .product(name: "FoundationExt", package: "Platform"),
+                .product(name: "CleanSwiftUtil", package: "Platform"),
             ]
         ),
         .target(

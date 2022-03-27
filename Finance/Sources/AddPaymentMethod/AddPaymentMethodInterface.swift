@@ -5,17 +5,20 @@
 //  Created by 정국희 on 2022/02/16.
 //
 
-import Foundation
-import ModernRIBs
+import UIKit
+
 import FinanceEntity
 import RIBsUtil
+import CleanSwiftUtil
 
-public protocol AddPaymentMethodBuildable: Buildable {
-    func build(
-        withListener listener: AddPaymentMethodListener,
-        closeButtonType: DismissButtonType
-    ) -> ViewableRouting
+// MARK: - AddPaymentMethodBuildingLogic definition
+
+public protocol AddPaymentMethodBuildingLogic: Buildable {
+    /// 자유롭게 매개변수 추가하기 (Add parameters freely)
+    func build(listener: AddPaymentMethodListener, closeButtonType: DismissButtonType) -> UIViewController
 }
+
+// MARK: - AddPaymentMethodListener
 
 public protocol AddPaymentMethodListener: AnyObject {
     // TODO: Declare methods the interactor can invoke to communicate with other RIBs.

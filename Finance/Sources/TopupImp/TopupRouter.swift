@@ -18,25 +18,24 @@ protocol TopupInteractable: Interactable, AddPaymentMethodListener, EnterAmountL
 }
 
 final class TopupRouter: Router<TopupInteractable>, TopupRouting {
+    private var navigationController: UINavigationController?
     
-    private var navigationControllable: NavigationControllerable?
-    
-    private let addPaymentMethodBuildable: AddPaymentMethodBuildable
-    private var addPaymentMethodRouting: Routing?
+    private let addPaymentMethodBuildable: AddPaymentMethodBuildingLogic
+    private var addPaymentMethodRouting: UIViewController?
     
     private let enterAmountBuildable: EnterAmountBuildable
     private var enterAmountRouting: Routing?
     
-    private let cardOnFileBuildable: CardOnFileBuildable
-    private var cardOnFileRouting: Routing?
+    private let cardOnFileBuildable: CardOnFileBuildingLogic
+    private var cardOnFileRouting: UIViewController?
     
     // TODO: Constructor inject child builder protocols to allow building children.
     init(
         interactor: TopupInteractable,
         viewController: TopupBaseViewControllable,
-        addPaymentMethodBuildable: AddPaymentMethodBuildable,
+        addPaymentMethodBuildable: AddPaymentMethodBuildingLogic,
         enterAmountBuildable: EnterAmountBuildable,
-        cardOnFileBuildable: CardOnFileBuildable
+        cardOnFileBuildable: CardOnFileBuildingLogic
     ) {
         self.viewController = viewController
         self.addPaymentMethodBuildable = addPaymentMethodBuildable
@@ -51,39 +50,35 @@ final class TopupRouter: Router<TopupInteractable>, TopupRouting {
         // it may have added to the view hierarchy, when its interactor is deactivated.
         guard
             nil != viewController.uiviewController.presentedViewController,
-            nil != navigationControllable
+            nil != navigationController
         else { return }
         
-        navigationControllable?.dismiss(completion: nil)
+        navigationController?.dismiss(animated: true)
     }
     
     // MARK: - Private
     
     private let viewController: TopupBaseViewControllable
     
-    func attachAddPaymentMethod(closeButtonType: DismissButtonType) {
+    func attachAddPaymentMethod(closeButtonType: DismissButtonType) {        
         guard nil == addPaymentMethodRouting else { return }
         
-        let router = addPaymentMethodBuildable.build(
-            withListener: interactor,
-            closeButtonType: closeButtonType
-        )
+        let destination = addPaymentMethodBuildable.build(listener: interactor, closeButtonType: .close)
         
-        if let navigationControllerable = navigationControllable {
-            navigationControllerable.pushViewController(router.viewControllable, animated: true)
+        if let navigationController = navigationController {
+            navigationController.pushViewController(destination, animated: true)
         } else {
-            presentInsideNavigation(router.viewControllable)
+            presentInsideNavigation(destination)
         }
-        addPaymentMethodRouting = router
-        attachChild(router)
+
+        addPaymentMethodRouting = destination
     }
     
     func detachAddPaymentMethod() {
-        guard let router = addPaymentMethodRouting else { return }
+        guard nil == addPaymentMethodRouting else { return }
         
-        navigationControllable?.popViewController(animated: true)
+        navigationController?.popViewController(animated: true)
         
-        detachChild(router)
         addPaymentMethodRouting = nil
     }
     
@@ -92,13 +87,13 @@ final class TopupRouter: Router<TopupInteractable>, TopupRouting {
         
         let router = enterAmountBuildable.build(withListener: interactor)
         
-        if let navigationControllerable = navigationControllable {
+        if let navigationController = navigationController {
             /// 첫화면 카드 추가 -> 카드 추가 후
-            navigationControllerable.setViewControllers([router.viewControllable])
+            navigationController.setViewControllers([router.viewControllable.uiviewController], animated: true)
             resetChildRouting()
         } else {
             /// 첫 화면이 충전하기
-            presentInsideNavigation(router.viewControllable)
+            presentInsideNavigation(router.viewControllable.uiviewController)
         }
         
         enterAmountRouting = router
@@ -132,7 +127,7 @@ final class TopupRouter: Router<TopupInteractable>, TopupRouting {
     }
     
     func popToRoot() {
-        navigationControllable?.popToRoot(animated: true)
+        navigationController?.popToRootViewController(animated: true)
         resetChildRouting()
     }
 }
@@ -140,27 +135,29 @@ final class TopupRouter: Router<TopupInteractable>, TopupRouting {
 // MARK: - private
 
 extension TopupRouter {
-    private func presentInsideNavigation(_ viewControllable: ViewControllable) {
-        let navigationControllerable = NavigationControllerable(root: viewControllable)
-        navigationControllerable.navigationController.presentationController?.delegate = viewController.presentationDelegate
-        self.navigationControllable = navigationControllerable
-        viewController.present(navigationControllerable, animated: true, completion: nil)
+    private func presentInsideNavigation(_ viewControllable: UIViewController) {
+        let navigationController = UINavigationController(rootViewController: viewControllable)
+        navigationController.navigationBar.isTranslucent = false
+        navigationController.navigationBar.backgroundColor = .white
+        navigationController.navigationBar.scrollEdgeAppearance = navigationController.navigationBar.standardAppearance
+        self.navigationController = navigationController
+        navigationController.presentationController?.delegate = viewController.presentationDelegate
+        viewController.uiviewController.present(navigationController, animated: true, completion: nil)
     }
     
     private func dismissPresentedNavigation(completion: (() -> Void)?) {
-        guard nil != navigationControllable else { return }
+        guard nil != navigationController else { return }
         
         viewController.dismiss(completion: completion)
-        navigationControllable = nil
+        navigationController = nil
     }
     
     private func resetChildRouting() {
-        if let routing = cardOnFileRouting {
-            detachChild(routing)
+        if nil != cardOnFileRouting {
             cardOnFileRouting = nil
         }
-        if let routing = addPaymentMethodRouting {
-            detachChild(routing)
+        
+        if nil != addPaymentMethodRouting {
             addPaymentMethodRouting = nil
         }
     }

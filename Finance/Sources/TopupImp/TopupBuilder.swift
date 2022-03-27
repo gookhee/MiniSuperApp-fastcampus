@@ -18,14 +18,14 @@ public protocol TopupDependency: Dependency {
     // created by this RIB.
     var cardOnFileRepository: CardOnFileRepositoryAvailable { get }
     var superPayRepository: SuperPayRepositoryAvailable { get }
-    var addPaymentMethodBuildable: AddPaymentMethodBuildable { get }
+    var addPaymentMethodBuildable: AddPaymentMethodBuildingLogic { get }
 }
 
 final class TopupComponent: Component<TopupDependency>, TopupInteractorDependency, EnterAmountDependency, CardOnFileDependency {
     var superPayRepository: SuperPayRepositoryAvailable { dependency.superPayRepository }
     var cardOnFileRepository: CardOnFileRepositoryAvailable { dependency.cardOnFileRepository }
     var selectedPaymentMethod: ReadOnlyCurrentValuePublisher<PaymentMethod> { paymentMethodStream }
-    var addPaymentMethodBuildable: AddPaymentMethodBuildable { dependency.addPaymentMethodBuildable }
+    var addPaymentMethodBuildable: AddPaymentMethodBuildingLogic { dependency.addPaymentMethodBuildable }
 
     let paymentMethodStream: CurrentValuePublisher<PaymentMethod>
 

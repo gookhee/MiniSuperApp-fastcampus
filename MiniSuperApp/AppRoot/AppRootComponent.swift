@@ -31,7 +31,7 @@ final class AppRootComponent: Component<AppRootDependency>, AppHomeDependency, F
        TopupBuilder(dependency: self)
     }()
     
-    lazy var addPaymentMethodBuildable: AddPaymentMethodBuildable = {
+    lazy var addPaymentMethodBuildable: AddPaymentMethodBuildingLogic = {
        AddPaymentMethodBuilder(dependency: self)
     }()
     

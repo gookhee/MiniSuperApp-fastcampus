@@ -9,7 +9,7 @@ protocol FinanceHomeInteractable: Interactable, SuperPayDashboardListener, CardO
     var listener: FinanceHomeListener? { get set }
 }
 
-protocol FinanceHomeViewControllable: ViewControllable, TopupBaseViewControllable {
+protocol FinanceHomeViewControllable: TopupBaseViewControllable {
     // TODO: Declare methods the router invokes to manipulate the view hierarchy.
     func addDashboard(_ view: ViewControllable)
 }
@@ -22,8 +22,8 @@ final class FinanceHomeRouter: ViewableRouter<FinanceHomeInteractable, FinanceHo
     private let cardOnFileDashboardBuildable: CardOnFileDashboardBuildable
     private var cardOnFileRouting: Routing?
     
-    private let addPaymentMethodBuildable: AddPaymentMethodBuildable
-    private var addPaymentMethodRouting: Routing?
+    private let addPaymentMethodBuildable: AddPaymentMethodBuildingLogic
+    private var addPaymentMethodRouting: UIViewController?
     
     private let topupBuildable: TopupBuildable
     private var topupRouting: Routing?
@@ -35,7 +35,7 @@ final class FinanceHomeRouter: ViewableRouter<FinanceHomeInteractable, FinanceHo
         viewController: FinanceHomeViewControllable,
         superPayDashboardBuildable: SuperPayDashboardBuildable,
         cardOnFileDashboardBuildable: CardOnFileDashboardBuildable,
-        addPaymentMethodBuildable: AddPaymentMethodBuildable,
+        addPaymentMethodBuildable: AddPaymentMethodBuildingLogic,
         topupBuildable: TopupBuildable
     ) {
         self.superPayDashboardBuildable = superPayDashboardBuildable
@@ -79,21 +79,24 @@ final class FinanceHomeRouter: ViewableRouter<FinanceHomeInteractable, FinanceHo
     func attachAddPaymentMethod() {
         guard nil == addPaymentMethodRouting else { return }
         
-        let router = addPaymentMethodBuildable.build(withListener: interactor, closeButtonType: .close)
-        let navigationController = NavigationControllerable(root: router.viewControllable)
-        navigationController.navigationController.presentationController?.delegate = viewController.presentationDelegate
-        viewController.present(navigationController, animated: true, completion: nil)
+        let destination = addPaymentMethodBuildable.build(listener: interactor, closeButtonType: .close)
         
-        addPaymentMethodRouting = router
-        attachChild(router)
+        let navigationController = UINavigationController(rootViewController: destination)
+        navigationController.navigationBar.isTranslucent = false
+        navigationController.navigationBar.backgroundColor = .white
+        navigationController.navigationBar.scrollEdgeAppearance = navigationController.navigationBar.standardAppearance
+ 
+        navigationController.presentationController?.delegate = viewController.presentationDelegate
+        viewController.uiviewController.present(navigationController, animated: true, completion: nil)
+        
+        addPaymentMethodRouting = destination
     }
     
     func detachAddPaymentMethod() {
         guard let router = addPaymentMethodRouting else { return }
         
-        viewController.dismiss(completion: nil)
+        viewController.uiviewController.dismiss(animated: true, completion: nil)
         
-        detachChild(router)
         addPaymentMethodRouting = nil
     }
     
