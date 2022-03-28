@@ -23,7 +23,7 @@ final class AppRootComponent: Component<AppRootDependency>, AppHomeDependency, F
     let superPayRepository: SuperPayRepositoryAvailable
     let cardOnFileRepository: CardOnFileRepositoryAvailable
     
-    lazy var transportHomeBuildable: TransportHomeBuildable = {
+    lazy var transportHomeBuildable: TransportHomeBuildingLogic = {
        TransportHomeBuilder(dependency: self)
     }()
     

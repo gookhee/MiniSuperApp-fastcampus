@@ -1,6 +1,7 @@
 import ModernRIBs
 import SuperUI
 import TransportHome
+import UIKit
 
 protocol AppHomeInteractable: Interactable, TransportHomeListener {
     var router: AppHomeRouting? { get set }
@@ -12,15 +13,14 @@ protocol AppHomeViewControllable: ViewControllable {
 }
 
 final class AppHomeRouter: ViewableRouter<AppHomeInteractable, AppHomeViewControllable>, AppHomeRouting {
-    
-    private let transportHomeBuildable: TransportHomeBuildable
-    private var transportHomeRouting: Routing?
+    private let transportHomeBuildable: TransportHomeBuildingLogic
+    private var transportHomeRouting: UIViewController?
     private let transitioningDelegate: PushModalPresentationController
     
     init(
         interactor: AppHomeInteractable,
         viewController: AppHomeViewControllable,
-        transportHomeBuildable: TransportHomeBuildable
+        transportHomeBuildable: TransportHomeBuildingLogic
     ) {
         self.transitioningDelegate = PushModalPresentationController()
         self.transportHomeBuildable = transportHomeBuildable
@@ -33,26 +33,24 @@ final class AppHomeRouter: ViewableRouter<AppHomeInteractable, AppHomeViewContro
             return
         }
         
-        let router = transportHomeBuildable.build(withListener: interactor)
-        presentWithPushTransition(router.viewControllable, animated: true)
-        attachChild(router)
-        self.transportHomeRouting = router
+        let destination = transportHomeBuildable.build(withListener: interactor)
+        presentWithPushTransition(destination, animated: true)
+        self.transportHomeRouting = destination
     }
     
     func detachTransportHome() {
-        guard let router = transportHomeRouting else {
+        guard nil != transportHomeRouting else {
             return
         }
         
         viewController.dismiss(completion: nil)
         self.transportHomeRouting = nil
-        detachChild(router)
     }
     
-    private func presentWithPushTransition(_ viewControllable: ViewControllable, animated: Bool) {
-        viewControllable.uiviewController.modalPresentationStyle = .custom
-        viewControllable.uiviewController.transitioningDelegate = transitioningDelegate
-        viewController.present(viewControllable, animated: true, completion: nil)
+    private func presentWithPushTransition(_ viewControllable: UIViewController, animated: Bool) {
+        viewControllable.modalPresentationStyle = .custom
+        viewControllable.transitioningDelegate = transitioningDelegate
+        viewController.uiviewController.present(viewControllable, animated: true, completion: nil)
     }
     
 }
