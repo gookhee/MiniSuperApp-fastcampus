@@ -1,3 +1,5 @@
+import UIKit
+
 import ModernRIBs
 import RIBsUtil
 import FinanceHome
@@ -13,24 +15,24 @@ protocol AppRootInteractable: Interactable,
 }
 
 protocol AppRootViewControllable: ViewControllable {
-    func setViewControllers(_ viewControllers: [ViewControllable])
+    func setViewControllers(_ viewControllers: [UIViewController])
 }
 
 final class AppRootRouter: LaunchRouter<AppRootInteractable, AppRootViewControllable>, AppRootRouting {
     
     private let appHome: AppHomeBuildable
-    private let financeHome: FinanceHomeBuildable
+    private let financeHome: FinanceHomeBuildingLogic
     private let profileHome: ProfileHomeBuildable
     
-    private var appHomeRouting: ViewableRouting?
-    private var financeHomeRouting: ViewableRouting?
+    private var appHomeRouting: UIViewController?
+    private var financeHomeRouting: UIViewController?
     private var profileHomeRouting: ViewableRouting?
     
     init(
         interactor: AppRootInteractable,
         viewController: AppRootViewControllable,
         appHome: AppHomeBuildable,
-        financeHome: FinanceHomeBuildable,
+        financeHome: FinanceHomeBuildingLogic,
         profileHome: ProfileHomeBuildable
     ) {
         self.appHome = appHome
@@ -47,15 +49,23 @@ final class AppRootRouter: LaunchRouter<AppRootInteractable, AppRootViewControll
         let profileHomeRouting = profileHome.build(withListener: interactor)
         
         attachChild(appHomeRouting)
-        attachChild(financeHomeRouting)
         attachChild(profileHomeRouting)
         
         let viewControllers = [
-            NavigationControllerable(root: appHomeRouting.viewControllable),
-            NavigationControllerable(root: financeHomeRouting.viewControllable),
-            profileHomeRouting.viewControllable
+            navigationController(rootViewController: appHomeRouting.viewControllable.uiviewController),
+            navigationController(rootViewController: financeHomeRouting),
+            profileHomeRouting.viewControllable.uiviewController
         ]
         
+        
         viewController.setViewControllers(viewControllers)
+    }
+    
+    func navigationController(rootViewController: UIViewController) -> UINavigationController {
+        let navigation = UINavigationController(rootViewController: rootViewController)
+        navigation.navigationBar.isTranslucent = false
+        navigation.navigationBar.backgroundColor = .white
+        navigation.navigationBar.scrollEdgeAppearance = navigation.navigationBar.standardAppearance
+        return navigation
     }
 }

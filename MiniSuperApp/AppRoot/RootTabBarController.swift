@@ -16,7 +16,7 @@ final class RootTabBarController: UITabBarController, AppRootViewControllable, A
         tabBar.backgroundColor = .white
     }
     
-    func setViewControllers(_ viewControllers: [ViewControllable]) {
-        super.setViewControllers(viewControllers.map(\.uiviewController), animated: false)
+    func setViewControllers(_ viewControllers: [UIViewController]) {
+        super.setViewControllers(viewControllers, animated: false)
     }
 }
