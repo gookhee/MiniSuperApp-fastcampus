@@ -30,18 +30,20 @@ public final class FinanceHomeBuilder: Builder<FinanceHomeDependency> {
 extension FinanceHomeBuilder: FinanceHomeBuildingLogic {
     public func build(withListener listener: FinanceHomeListener) -> Destination {
         let component = FinanceHomeComponent(dependency: dependency)
-        let viewController = FinanceHomeViewController()
         let interactor = FinanceHomeInteractor(
             worker: FinanceHomeWorker(),
             listener: listener
         )
         let presenter = FinanceHomePresenter()
-        let superPayDashboardBuilder = SuperPayDashboardBuilder(dependency: component)
-        let cardOnFileDashboardBuilder = CardOnFileDashboardBuilder(dependency: component)
+        let superPayDashboard = SuperPayDashboardBuilder(dependency: component)
+            .build(withListener: interactor)
+        let cardOnFileDashboard = CardOnFileDashboardBuilder(dependency: component)
+            .build(withListener: interactor)
+        let viewController = FinanceHomeViewController(
+            dashboards: [superPayDashboard, cardOnFileDashboard]
+        )
         let router = FinanceHomeRouter(
             viewController: viewController,
-            superPayDashboardBuildable: superPayDashboardBuilder,
-            cardOnFileDashboardBuildable: cardOnFileDashboardBuilder,
             addPaymentMethodBuildable: component.addPaymentMethodBuildable,
             topupBuildable: component.topupBuildable
         )

@@ -38,12 +38,12 @@ final class FinanceHomeInteractor {
 
 extension FinanceHomeInteractor: FinanceHomeRequestLogic {
     func process(_ request: FinanceHome.Request.OnLoad) {
-        router?.attachSuperPayDashboard(listener: self)
-        router?.attachCardOnFileDashboard(listener: self)
     }
     
     func process(_ request: FinanceHome.Request.OnViewDidDismiss) {
-
+        /// 여기서 다 호출해줘야함
+        router?.detachAddPaymentMethod()
+        router?.detachTopup()
     }
 }
 
@@ -113,8 +113,6 @@ protocol FinanceHomePresentationLogic {
 
 protocol FinanceHomeRoutingLogic {
     /// 자유롭게 매개변수 추가하기 (Add parameters freely)
-    func attachSuperPayDashboard(listener: SuperPayDashboardListener)
-    func attachCardOnFileDashboard(listener: CardOnFileDashboardListener)
     func attachAddPaymentMethod(listener: AddPaymentMethodListener)
     func detachAddPaymentMethod()
     func attachTopup(listener: TopupListener)

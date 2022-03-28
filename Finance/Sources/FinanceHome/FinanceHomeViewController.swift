@@ -18,8 +18,15 @@ import Topup
 
 final class FinanceHomeViewController: UIViewController {
     var interactor: FinanceHomeRequestLogic?
+    private var dashboards = [UIViewController]()
 
     // MARK: - View lifecycle
+    
+    convenience init(dashboards: [UIViewController]) {
+        self.init()
+        
+        self.dashboards = dashboards
+    }
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -38,8 +45,6 @@ final class FinanceHomeViewController: UIViewController {
         setupViews()
         interactor?.process(FinanceHome.Request.OnLoad())
     }
-    
-    var presentationDelegate: UIAdaptivePresentationControllerDelegate { self }
     
     private let stackView: UIStackView = {
         let stackView = UIStackView()
@@ -63,13 +68,17 @@ final class FinanceHomeViewController: UIViewController {
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
+        
+        dashboards.forEach {
+            addDashboard($0)
+        }
     }
 }
 
-// MARK: - FinanceHomeViewControllable
+// MARK: - private
 
-extension FinanceHomeViewController: FinanceHomeViewControllable {
-    func addDashboard(_ viewController: UIViewController) {
+extension FinanceHomeViewController {
+    private func addDashboard(_ viewController: UIViewController) {
         addChild(viewController)
         stackView.addArrangedSubview(viewController.view)
         viewController.didMove(toParent: self)
@@ -86,4 +95,10 @@ extension FinanceHomeViewController: UIAdaptivePresentationControllerDelegate {
     func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
         interactor?.process(FinanceHome.Request.OnViewDidDismiss())
     }
+}
+
+// MARK:
+
+extension FinanceHomeViewController: FinanceHomeViewControllable {
+    var presentationDelegate: UIAdaptivePresentationControllerDelegate { self }
 }

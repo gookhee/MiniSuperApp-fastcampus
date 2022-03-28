@@ -21,13 +21,7 @@ import CleanSwiftUtil
 
 final class FinanceHomeRouter: NSObject {
     weak var viewController: FinanceHomeViewControllable?
-    
-    private let superPayDashboardBuildable: SuperPayDashboardBuildingLogic
-    private var superPayRouting: UIViewController?
-    
-    private let cardOnFileDashboardBuildable: CardOnFileDashboardBuildingLogic
-    private var cardOnFileRouting: UIViewController?
-    
+
     private let addPaymentMethodBuildable: AddPaymentMethodBuildingLogic
     private var addPaymentMethodRouting: UIViewController?
     
@@ -36,13 +30,10 @@ final class FinanceHomeRouter: NSObject {
     
     init(
         viewController: FinanceHomeViewControllable,
-        superPayDashboardBuildable: SuperPayDashboardBuildingLogic,
-        cardOnFileDashboardBuildable: CardOnFileDashboardBuildingLogic,
         addPaymentMethodBuildable: AddPaymentMethodBuildingLogic,
         topupBuildable: TopupBuildingLogic
     ) {
-        self.superPayDashboardBuildable = superPayDashboardBuildable
-        self.cardOnFileDashboardBuildable = cardOnFileDashboardBuildable
+        self.viewController = viewController
         self.addPaymentMethodBuildable = addPaymentMethodBuildable
         self.topupBuildable = topupBuildable
     }
@@ -51,28 +42,6 @@ final class FinanceHomeRouter: NSObject {
 // MARK: - FinanceHomeRoutingLogic
 
 extension FinanceHomeRouter: FinanceHomeRoutingLogic {
-    func attachSuperPayDashboard(listener: SuperPayDashboardListener) {
-        if superPayRouting != nil {
-            return
-        }
-        let destination = superPayDashboardBuildable.build(withListener: listener)
-        
-        viewController?.addDashboard(destination)
-        
-        self.superPayRouting = destination
-    }
-    
-    func attachCardOnFileDashboard(listener: CardOnFileDashboardListener) {
-        if cardOnFileRouting != nil {
-            return
-        }
-        let destination = cardOnFileDashboardBuildable.build(withListener: listener)
-        
-        viewController?.addDashboard(destination)
-        
-        self.cardOnFileRouting = destination
-    }
-    
     func attachAddPaymentMethod(listener: AddPaymentMethodListener) {
         guard nil == addPaymentMethodRouting else { return }
         
@@ -125,5 +94,4 @@ extension FinanceHomeRouter: FinanceHomeRoutingLogic {
 
 protocol FinanceHomeViewControllable: TopupBaseViewControllable {
     // TODO: Declare methods the router invokes to manipulate the view hierarchy.
-    func addDashboard(_ view: UIViewController)
 }
