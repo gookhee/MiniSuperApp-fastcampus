@@ -1,22 +1,11 @@
 import UIKit
 
-struct HomeWidgetViewModel {
-    let image: UIImage?
-    let title: String
-    let tapHandler: () -> Void
-    
-    init(_ model: HomeWidgetModel) {
-        image = UIImage(systemName: model.imageName)
-        title = model.title
-        tapHandler = model.tapHandler
-    }
-}
-
 final class HomeWidgetView: UIView {
+    private let tapHandler: () -> Void
     
-    init(viewModel: HomeWidgetViewModel) {
+    init(viewModel: AppHome.ViewModel.Widget, tapHandler: @escaping () -> Void) {
+        self.tapHandler = tapHandler
         super.init(frame: .zero)
-        
         setupViews()
         update(with: viewModel)
     }
@@ -25,12 +14,9 @@ final class HomeWidgetView: UIView {
         fatalError()
     }
     
-    private var tapHandler: (() -> Void)?
-    
-    private func update(with viewModel: HomeWidgetViewModel) {
-        imageView.image = viewModel.image
+    private func update(with viewModel: AppHome.ViewModel.Widget) {
+        imageView.image = UIImage(systemName: viewModel.imageName)
         titleLabel.text = viewModel.title
-        tapHandler = viewModel.tapHandler
     }
     
     private let imageView: UIImageView = {
@@ -71,7 +57,6 @@ final class HomeWidgetView: UIView {
     
     @objc
     private func didTap() {
-        tapHandler?()
+        tapHandler()
     }
-    
 }

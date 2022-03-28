@@ -20,7 +20,7 @@ protocol AppRootViewControllable: ViewControllable {
 
 final class AppRootRouter: LaunchRouter<AppRootInteractable, AppRootViewControllable>, AppRootRouting {
     
-    private let appHome: AppHomeBuildable
+    private let appHome: AppHomeBuildingLogic
     private let financeHome: FinanceHomeBuildingLogic
     private let profileHome: ProfileHomeBuildingLogic
     
@@ -31,7 +31,7 @@ final class AppRootRouter: LaunchRouter<AppRootInteractable, AppRootViewControll
     init(
         interactor: AppRootInteractable,
         viewController: AppRootViewControllable,
-        appHome: AppHomeBuildable,
+        appHome: AppHomeBuildingLogic,
         financeHome: FinanceHomeBuildingLogic,
         profileHome: ProfileHomeBuildingLogic
     ) {
@@ -48,10 +48,8 @@ final class AppRootRouter: LaunchRouter<AppRootInteractable, AppRootViewControll
         let financeHomeRouting = financeHome.build(withListener: interactor)
         let profileHomeRouting = profileHome.build(withListener: interactor)
         
-        attachChild(appHomeRouting)
-        
         let viewControllers = [
-            navigationController(rootViewController: appHomeRouting.viewControllable.uiviewController),
+            navigationController(rootViewController: appHomeRouting),
             navigationController(rootViewController: financeHomeRouting),
             profileHomeRouting
         ]
