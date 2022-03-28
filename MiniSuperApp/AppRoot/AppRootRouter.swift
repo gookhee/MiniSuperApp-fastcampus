@@ -22,18 +22,18 @@ final class AppRootRouter: LaunchRouter<AppRootInteractable, AppRootViewControll
     
     private let appHome: AppHomeBuildable
     private let financeHome: FinanceHomeBuildingLogic
-    private let profileHome: ProfileHomeBuildable
+    private let profileHome: ProfileHomeBuildingLogic
     
     private var appHomeRouting: UIViewController?
     private var financeHomeRouting: UIViewController?
-    private var profileHomeRouting: ViewableRouting?
+    private var profileHomeRouting: UIViewController?
     
     init(
         interactor: AppRootInteractable,
         viewController: AppRootViewControllable,
         appHome: AppHomeBuildable,
         financeHome: FinanceHomeBuildingLogic,
-        profileHome: ProfileHomeBuildable
+        profileHome: ProfileHomeBuildingLogic
     ) {
         self.appHome = appHome
         self.financeHome = financeHome
@@ -49,14 +49,12 @@ final class AppRootRouter: LaunchRouter<AppRootInteractable, AppRootViewControll
         let profileHomeRouting = profileHome.build(withListener: interactor)
         
         attachChild(appHomeRouting)
-        attachChild(profileHomeRouting)
         
         let viewControllers = [
             navigationController(rootViewController: appHomeRouting.viewControllable.uiviewController),
             navigationController(rootViewController: financeHomeRouting),
-            profileHomeRouting.viewControllable.uiviewController
+            profileHomeRouting
         ]
-        
         
         viewController.setViewControllers(viewControllers)
     }
