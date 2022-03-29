@@ -76,7 +76,7 @@ extension TopupRouter: TopupRoutingLogic {
     }
     
     func detachAddPaymentMethod() {
-        guard nil == addPaymentMethodRouting else { return }
+        guard nil != addPaymentMethodRouting else { return }
         
         navigationController?.popViewController(animated: true)
         
