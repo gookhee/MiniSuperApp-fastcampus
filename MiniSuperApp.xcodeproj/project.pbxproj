@@ -36,7 +36,6 @@
 		F5829F5926DB2BC400BFA8CD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5829F5826DB2BC400BFA8CD /* AppDelegate.swift */; };
 		F5829F6226DB2BC500BFA8CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F5829F6126DB2BC500BFA8CD /* Assets.xcassets */; };
 		F5829F6526DB2BC500BFA8CD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F5829F6326DB2BC500BFA8CD /* LaunchScreen.storyboard */; };
-		F5829F6E26DB2DE900BFA8CD /* ModernRIBs in Frameworks */ = {isa = PBXBuildFile; productRef = F5829F6D26DB2DE900BFA8CD /* ModernRIBs */; };
 		F5829F7926DB397300BFA8CD /* AppComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5829F7826DB397300BFA8CD /* AppComponent.swift */; };
 /* End PBXBuildFile section */
 
@@ -77,7 +76,6 @@
 				DE92089727BC655300E2077E /* FinanceEntity in Frameworks */,
 				DEA8F6FC27BCC6C800919184 /* TopupImp in Frameworks */,
 				DE3BDC6727BC7B9300EFFC47 /* SuperUI in Frameworks */,
-				F5829F6E26DB2DE900BFA8CD /* ModernRIBs in Frameworks */,
 				DE0F302E27BCAB5E00754F6C /* ProfileHome in Frameworks */,
 				DEEA0CC227BCA8FB003A57E5 /* AppHome in Frameworks */,
 				DEA0C8BD27BC9C6800478236 /* TransportHome in Frameworks */,
@@ -175,7 +173,6 @@
 			);
 			name = MiniSuperApp;
 			packageProductDependencies = (
-				F5829F6D26DB2DE900BFA8CD /* ModernRIBs */,
 				DEC1AE41276A0AA60024D730 /* CombineExt */,
 				DE92089627BC655300E2077E /* FinanceEntity */,
 				DE92089827BC655300E2077E /* FinanceRepository */,
@@ -222,7 +219,6 @@
 			);
 			mainGroup = F5829F4C26DB2BC400BFA8CD;
 			packageReferences = (
-				F5829F6C26DB2DE900BFA8CD /* XCRemoteSwiftPackageReference "ModernRIBs" */,
 				DEC1AE40276A0AA60024D730 /* XCRemoteSwiftPackageReference "CombineExt" */,
 			);
 			productRefGroup = F5829F5626DB2BC400BFA8CD /* Products */;
@@ -465,14 +461,6 @@
 				version = 1.5.1;
 			};
 		};
-		F5829F6C26DB2DE900BFA8CD /* XCRemoteSwiftPackageReference "ModernRIBs" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/DevYeom/ModernRIBs";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.1;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -544,11 +532,6 @@
 		DEEA0CC127BCA8FB003A57E5 /* AppHome */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AppHome;
-		};
-		F5829F6D26DB2DE900BFA8CD /* ModernRIBs */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = F5829F6C26DB2DE900BFA8CD /* XCRemoteSwiftPackageReference "ModernRIBs" */;
-			productName = ModernRIBs;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
