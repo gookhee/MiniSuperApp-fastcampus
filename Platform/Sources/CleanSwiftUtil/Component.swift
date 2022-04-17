@@ -70,7 +70,7 @@ open class CleanSwiftComponent<DependencyType>: CleanSwiftDependency {
 }
 
 /// The special empty component.
-open class EmptyComponent: EmptyDependency {
+open class CleanSwiftEmptyComponent: CleanSwiftEmptyDependency {
 
     /// Initializer.
     public init() {}

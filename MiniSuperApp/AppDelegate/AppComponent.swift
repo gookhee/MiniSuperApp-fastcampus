@@ -1,10 +1,10 @@
 import Foundation
 import CleanSwiftUtil
 
-final class AppComponent: CleanSwiftComponent<EmptyDependency>, AppRootDependency {
+final class AppComponent: CleanSwiftComponent<CleanSwiftEmptyDependency>, AppRootDependency {
 
     init() {
-        super.init(dependency: EmptyComponent())
+        super.init(dependency: CleanSwiftEmptyComponent())
     }
 
 }

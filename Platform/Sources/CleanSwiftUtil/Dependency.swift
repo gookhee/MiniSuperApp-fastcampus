@@ -23,4 +23,4 @@ import Foundation
 public protocol CleanSwiftDependency: AnyObject {}
 
 /// The special empty dependency.
-public protocol EmptyDependency: CleanSwiftDependency {}
+public protocol CleanSwiftEmptyDependency: CleanSwiftDependency {}
