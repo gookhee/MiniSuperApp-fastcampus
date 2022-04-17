@@ -70,7 +70,7 @@ public protocol AppRootBuildingLogic {
 
 // MARK: - AppRootDependency
 
-public protocol AppRootDependency: Dependency {
+public protocol AppRootDependency: CleanSwiftDependency {
     // TODO: Declare the set of dependencies required by this RIB, but cannot be
     // created by this RIB.
 }

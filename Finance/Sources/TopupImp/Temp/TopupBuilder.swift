@@ -51,7 +51,7 @@ extension TopupBuilder: TopupBuildingLogic {
 
 // MARK: - TopupDependency
 
-public protocol TopupDependency: Dependency {
+public protocol TopupDependency: CleanSwiftDependency {
     // TODO: Make sure to convert the variable into lower-camelcase.
     // TODO: Declare the set of dependencies required by this RIB, but won't be
     // created by this RIB.
@@ -62,7 +62,7 @@ public protocol TopupDependency: Dependency {
 
 // MARK - TopupComponent
 
-final class TopupComponent: Component<TopupDependency>, TopupInteractorDependency, EnterAmountDependency, CardOnFileDependency {
+final class TopupComponent: CleanSwiftComponent<TopupDependency>, TopupInteractorDependency, EnterAmountDependency, CardOnFileDependency {
     var superPayRepository: SuperPayRepositoryAvailable { dependency.superPayRepository }
     var cardOnFileRepository: CardOnFileRepositoryAvailable { dependency.cardOnFileRepository }
     var selectedPaymentMethod: ReadOnlyCurrentValuePublisher<PaymentMethod> { paymentMethodStream }

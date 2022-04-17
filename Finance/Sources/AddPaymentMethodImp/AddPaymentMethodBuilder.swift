@@ -46,7 +46,7 @@ public protocol AddPaymentMethodDependency {
 
 // MARK: - AddPaymentMethodComponent
 
-final class AddPaymentMethodComponent:Component<AddPaymentMethodDependency>, AddPaymentMethodInteractorDependency {
+final class AddPaymentMethodComponent:CleanSwiftComponent<AddPaymentMethodDependency>, AddPaymentMethodInteractorDependency {
     // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
     var cardOnFileRepository: CardOnFileRepositoryAvailable { dependency.cardOnFileRepository }
 }

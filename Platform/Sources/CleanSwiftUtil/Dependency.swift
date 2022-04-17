@@ -20,7 +20,7 @@ import Foundation
 ///
 /// Subclasses should define a set of properties that are required by the module from the DI graph. A dependency is
 /// typically provided and satisfied by its immediate parent module.
-public protocol Dependency: AnyObject {}
+public protocol CleanSwiftDependency: AnyObject {}
 
 /// The special empty dependency.
-public protocol EmptyDependency: Dependency {}
+public protocol EmptyDependency: CleanSwiftDependency {}

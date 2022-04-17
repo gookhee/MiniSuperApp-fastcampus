@@ -56,7 +56,7 @@ protocol EnterAmountBuildingLogic {
 
 // MARK: - EnterAmountDependency
 
-protocol EnterAmountDependency: Dependency {
+protocol EnterAmountDependency: CleanSwiftDependency {
     // TODO: Declare the set of dependencies required by this RIB, but cannot be
     // created by this RIB.
     var selectedPaymentMethod: ReadOnlyCurrentValuePublisher<PaymentMethod>  { get }
@@ -65,7 +65,7 @@ protocol EnterAmountDependency: Dependency {
 
 // MARK: - EnterAmountComponent
 
-final class EnterAmountComponent: Component<EnterAmountDependency>, EnterAmountInteractorDependency {
+final class EnterAmountComponent: CleanSwiftComponent<EnterAmountDependency>, EnterAmountInteractorDependency {
     var superPayRepository: SuperPayRepositoryAvailable { dependency.superPayRepository }
 
     var selectedPaymentMethod: ReadOnlyCurrentValuePublisher<PaymentMethod> {

@@ -52,14 +52,14 @@ protocol CardOnFileBuildingLogic: Buildable {
 
 // MARK: - CardOnFileDependency
 
-protocol CardOnFileDependency: Dependency {
+protocol CardOnFileDependency: CleanSwiftDependency {
     // TODO: Declare the set of dependencies required by this RIB, but cannot be
     // created by this RIB.
 }
 
 // MARK: - CardOnFileComponent
 
-final class CardOnFileComponent: Component<CardOnFileDependency> {
+final class CardOnFileComponent: CleanSwiftComponent<CardOnFileDependency> {
 
     // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
 }

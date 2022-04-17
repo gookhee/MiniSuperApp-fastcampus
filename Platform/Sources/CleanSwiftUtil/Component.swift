@@ -23,7 +23,7 @@ import Foundation
 ///
 /// A component subclass implementation should conform to child 'Dependency' protocols, defined by all of its immediate
 /// children.
-open class Component<DependencyType>: Dependency {
+open class CleanSwiftComponent<DependencyType>: CleanSwiftDependency {
 
     /// The dependency of this `Component`.
     public let dependency: DependencyType

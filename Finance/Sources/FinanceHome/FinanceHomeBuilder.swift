@@ -67,7 +67,7 @@ public protocol FinanceHomeBuildingLogic {
 
 // MARK: - FinanceHomeDependency
 
-public protocol FinanceHomeDependency: Dependency {
+public protocol FinanceHomeDependency: CleanSwiftDependency {
     // TODO: Declare the set of dependencies required by this RIB, but cannot be
     // created by this RIB.
     var superPayRepository: SuperPayRepositoryAvailable { get }
@@ -79,7 +79,7 @@ public protocol FinanceHomeDependency: Dependency {
 // MARK: - FinanceHomeComponent
 
 /// 자식리블렛의 의존성을 여기서 충족시켜줘야함
-final class FinanceHomeComponent: Component<FinanceHomeDependency>, SuperPayDashboardDependency, CardOnFileDashboardDependency {
+final class FinanceHomeComponent: CleanSwiftComponent<FinanceHomeDependency>, SuperPayDashboardDependency, CardOnFileDashboardDependency {
     var cardOnFileRepository: CardOnFileRepositoryAvailable { dependency.cardOnFileRepository }
     var superPayRepository: SuperPayRepositoryAvailable { dependency.superPayRepository }
     var topupBuildable: TopupBuildingLogic { dependency.topupBuildable }

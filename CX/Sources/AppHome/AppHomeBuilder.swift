@@ -53,7 +53,7 @@ public protocol AppHomeBuildingLogic {
 
 // MARK: - AppHomeDependency
 
-public protocol AppHomeDependency: Dependency {
+public protocol AppHomeDependency: CleanSwiftDependency {
     var superPayRepository: SuperPayRepositoryAvailable { get }
     var cardOnFileRepository: CardOnFileRepositoryAvailable { get }
     var transportHomeBuildable: TransportHomeBuildingLogic{ get }
@@ -61,7 +61,7 @@ public protocol AppHomeDependency: Dependency {
 
 // MARK: - AppHomeComponent
 
-final class AppHomeComponent: Component<AppHomeDependency> {
+final class AppHomeComponent: CleanSwiftComponent<AppHomeDependency> {
     var cardOnFileRepository: CardOnFileRepositoryAvailable { dependency.cardOnFileRepository }
     var superPayRepository: SuperPayRepositoryAvailable { dependency.superPayRepository }
     var transportHomeBuildable: TransportHomeBuildingLogic { dependency.transportHomeBuildable }

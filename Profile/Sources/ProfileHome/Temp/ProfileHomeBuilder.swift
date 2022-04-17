@@ -50,14 +50,14 @@ public protocol ProfileHomeBuildingLogic {
 
 // MARK: - ProfileHomeDependency
 
-public protocol ProfileHomeDependency: Dependency {
+public protocol ProfileHomeDependency: CleanSwiftDependency {
     // TODO: Declare the set of dependencies required by this RIB, but cannot be
     // created by this RIB.
 }
 
 // MARK: - ProfileHomeComponent
 
-final class ProfileHomeComponent: Component<ProfileHomeDependency> {
+final class ProfileHomeComponent: CleanSwiftComponent<ProfileHomeDependency> {
 
     // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
 }

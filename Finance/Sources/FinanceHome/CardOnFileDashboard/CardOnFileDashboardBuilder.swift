@@ -54,12 +54,12 @@ protocol CardOnFileDashboardBuildingLogic {
 
 // MARK: - CardOnFileDashboardDependency
 
-protocol CardOnFileDashboardDependency: Dependency {
+protocol CardOnFileDashboardDependency: CleanSwiftDependency {
     var cardOnFileRepository: CardOnFileRepositoryAvailable { get }
 }
 
 // MARK: - CardOnFileDashboardComponent
 
-final class CardOnFileDashboardComponent: Component<CardOnFileDashboardDependency>, CardOnFileDashboardInteractorDependency{
+final class CardOnFileDashboardComponent: CleanSwiftComponent<CardOnFileDashboardDependency>, CardOnFileDashboardInteractorDependency{
     var cardOnFileRepository: CardOnFileRepositoryAvailable { dependency.cardOnFileRepository }
 }

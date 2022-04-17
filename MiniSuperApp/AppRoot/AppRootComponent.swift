@@ -19,7 +19,7 @@ import AddPaymentMethod
 import AddPaymentMethodImp
 import CleanSwiftUtil
 
-final class AppRootComponent: Component<AppRootDependency>, AppHomeDependency, FinanceHomeDependency, ProfileHomeDependency, TransportHomeDependency, TopupDependency, AddPaymentMethodDependency {
+final class AppRootComponent: CleanSwiftComponent<AppRootDependency>, AppHomeDependency, FinanceHomeDependency, ProfileHomeDependency, TransportHomeDependency, TopupDependency, AddPaymentMethodDependency {
     let superPayRepository: SuperPayRepositoryAvailable
     let cardOnFileRepository: CardOnFileRepositoryAvailable
     

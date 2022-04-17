@@ -51,7 +51,7 @@ extension TransportHomeBuilder: TransportHomeBuildingLogic {
 
 // MARK: - TransportHomeDependency
 
-public protocol TransportHomeDependency: Dependency {
+public protocol TransportHomeDependency: CleanSwiftDependency {
     var superPayRepository: SuperPayRepositoryAvailable { get }
     var cardOnFileRepository: CardOnFileRepositoryAvailable { get }
     var topupBuildable: TopupBuildingLogic { get }
@@ -59,7 +59,7 @@ public protocol TransportHomeDependency: Dependency {
 
 // MARK: - TransportHomeComponent
 
-final class TransportHomeComponent: Component<TransportHomeDependency>, TransportHomeInteractorDependency {
+final class TransportHomeComponent: CleanSwiftComponent<TransportHomeDependency>, TransportHomeInteractorDependency {
     var cardOnFileRepository: CardOnFileRepositoryAvailable { dependency.cardOnFileRepository }
     
     var superPayRepository: SuperPayRepositoryAvailable { dependency.superPayRepository }
