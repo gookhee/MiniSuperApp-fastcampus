@@ -9,6 +9,15 @@
           "revision": "0880829102152185190064fd17847a7c681d2127",
           "version": "1.5.1"
         }
+      },
+      {
+        "package": "NeedleFoundation",
+        "repositoryURL": "https://github.com/uber/needle.git",
+        "state": {
+          "branch": null,
+          "revision": "32b816e7e10cdb094abe10d1824d354d6e279e80",
+          "version": "0.18.0"
+        }
       }
     ]
   },

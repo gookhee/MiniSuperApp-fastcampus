@@ -240,6 +240,7 @@
 			mainGroup = F5829F4C26DB2BC400BFA8CD;
 			packageReferences = (
 				DEC1AE40276A0AA60024D730 /* XCRemoteSwiftPackageReference "CombineExt" */,
+				DEEE9F3E280C0E4B002AF745 /* XCRemoteSwiftPackageReference "needle" */,
 			);
 			productRefGroup = F5829F5626DB2BC400BFA8CD /* Products */;
 			projectDirPath = "";
@@ -502,6 +503,14 @@
 			requirement = {
 				kind = exactVersion;
 				version = 1.5.1;
+			};
+		};
+		DEEE9F3E280C0E4B002AF745 /* XCRemoteSwiftPackageReference "needle" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/uber/needle.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.18.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
