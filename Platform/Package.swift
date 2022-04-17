@@ -13,10 +13,6 @@ let package = Package(
             targets: ["CombineUtil"]
         ),
         .library(
-            name: "RIBsUtil",
-            targets: ["RIBsUtil"]
-        ),
-        .library(
             name: "SuperUI",
             targets: ["SuperUI"]
         ),
@@ -44,14 +40,8 @@ let package = Package(
             ]
         ),
         .target(
-            name: "RIBsUtil",
-            dependencies: [
-            ]
-        ),
-        .target(
             name: "SuperUI",
             dependencies: [
-                "RIBsUtil"
             ]
         ),
         .target(

@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import RIBsUtil
+import SuperUI
 
 public extension UIViewController {
     func setupNavigationItem(with buttonType: DismissButtonType, target: Any?, action: Selector?) {

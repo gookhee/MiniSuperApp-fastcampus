@@ -8,7 +8,7 @@
 import UIKit
 
 import FinanceEntity
-import RIBsUtil
+import SuperUI
 import CleanSwiftUtil
 
 // MARK: - AddPaymentMethodBuildingLogic definition

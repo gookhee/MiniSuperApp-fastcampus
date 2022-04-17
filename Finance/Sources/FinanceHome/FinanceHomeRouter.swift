@@ -14,7 +14,7 @@ import UIKit
 
 import AddPaymentMethod
 import Topup
-import RIBsUtil
+import SuperUI
 import CleanSwiftUtil
 
 // MARK: - FinanceHomeRouter

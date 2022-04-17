@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		DE04283627F03EAC0094FC7A /* CleanSwiftUtil in Frameworks */ = {isa = PBXBuildFile; productRef = DE04283527F03EAC0094FC7A /* CleanSwiftUtil */; };
 		DE0F302E27BCAB5E00754F6C /* ProfileHome in Frameworks */ = {isa = PBXBuildFile; productRef = DE0F302D27BCAB5E00754F6C /* ProfileHome */; };
-		DE3BDC6527BC743200EFFC47 /* RIBsUtil in Frameworks */ = {isa = PBXBuildFile; productRef = DE3BDC6427BC743200EFFC47 /* RIBsUtil */; };
 		DE3BDC6727BC7B9300EFFC47 /* SuperUI in Frameworks */ = {isa = PBXBuildFile; productRef = DE3BDC6627BC7B9300EFFC47 /* SuperUI */; };
 		DE3BDC6927BC87C500EFFC47 /* Topup in Frameworks */ = {isa = PBXBuildFile; productRef = DE3BDC6827BC87C500EFFC47 /* Topup */; };
 		DE72C9AF27BCD75E005E6A14 /* AddPaymentMethodImp in Frameworks */ = {isa = PBXBuildFile; productRef = DE72C9AE27BCD75E005E6A14 /* AddPaymentMethodImp */; };
@@ -82,7 +81,6 @@
 				DE8DD39E27BC953F004764D9 /* FinanceHome in Frameworks */,
 				DE04283627F03EAC0094FC7A /* CleanSwiftUtil in Frameworks */,
 				DE8DD39C27BC904C004764D9 /* FoundationExt in Frameworks */,
-				DE3BDC6527BC743200EFFC47 /* RIBsUtil in Frameworks */,
 				DE92089927BC655300E2077E /* FinanceRepository in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -177,7 +175,6 @@
 				DE92089627BC655300E2077E /* FinanceEntity */,
 				DE92089827BC655300E2077E /* FinanceRepository */,
 				DE8F92D227BC6B7A0089F6DC /* CombineUtil */,
-				DE3BDC6427BC743200EFFC47 /* RIBsUtil */,
 				DE3BDC6627BC7B9300EFFC47 /* SuperUI */,
 				DE3BDC6827BC87C500EFFC47 /* Topup */,
 				DE8DD39B27BC904C004764D9 /* FoundationExt */,
@@ -471,10 +468,6 @@
 		DE0F302D27BCAB5E00754F6C /* ProfileHome */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = ProfileHome;
-		};
-		DE3BDC6427BC743200EFFC47 /* RIBsUtil */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = RIBsUtil;
 		};
 		DE3BDC6627BC7B9300EFFC47 /* SuperUI */ = {
 			isa = XCSwiftPackageProductDependency;

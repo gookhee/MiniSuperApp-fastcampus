@@ -13,7 +13,7 @@
 import UIKit
 
 import FinanceRepository
-import RIBsUtil
+import SuperUI
 import AddPaymentMethod
 import CleanSwiftUtil
 

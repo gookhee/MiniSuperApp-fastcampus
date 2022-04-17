@@ -15,7 +15,7 @@ import Foundation
 import FinanceRepository
 import CombineUtil
 import FinanceEntity
-import RIBsUtil
+import SuperUI
 import FoundationExt
 import Topup
 import CleanSwiftUtil

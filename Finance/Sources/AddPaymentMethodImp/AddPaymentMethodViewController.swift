@@ -13,7 +13,7 @@
 import UIKit
 
 import SuperUI
-import RIBsUtil
+import SuperUI
 
 // MARK: - AddPaymentMethodViewController
 
