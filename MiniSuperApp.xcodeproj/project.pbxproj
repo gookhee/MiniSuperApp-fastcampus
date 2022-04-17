@@ -11,6 +11,7 @@
 		DE0F302E27BCAB5E00754F6C /* ProfileHome in Frameworks */ = {isa = PBXBuildFile; productRef = DE0F302D27BCAB5E00754F6C /* ProfileHome */; };
 		DE3BDC6727BC7B9300EFFC47 /* SuperUI in Frameworks */ = {isa = PBXBuildFile; productRef = DE3BDC6627BC7B9300EFFC47 /* SuperUI */; };
 		DE3BDC6927BC87C500EFFC47 /* Topup in Frameworks */ = {isa = PBXBuildFile; productRef = DE3BDC6827BC87C500EFFC47 /* Topup */; };
+		DE4F85A4280C376200DDF782 /* NeedleFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = DE4F85A3280C376200DDF782 /* NeedleFoundation */; };
 		DE5D5E30280C028E003C1686 /* NeedleGenerated.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE5D5E2F280C028E003C1686 /* NeedleGenerated.swift */; };
 		DE6730B8280BF80900AACD35 /* copyright_header.txt in Resources */ = {isa = PBXBuildFile; fileRef = DE6730B7280BF80900AACD35 /* copyright_header.txt */; };
 		DE72C9AF27BCD75E005E6A14 /* AddPaymentMethodImp in Frameworks */ = {isa = PBXBuildFile; productRef = DE72C9AE27BCD75E005E6A14 /* AddPaymentMethodImp */; };
@@ -86,6 +87,7 @@
 				DE04283627F03EAC0094FC7A /* CleanSwiftUtil in Frameworks */,
 				DE8DD39C27BC904C004764D9 /* FoundationExt in Frameworks */,
 				DE92089927BC655300E2077E /* FinanceRepository in Frameworks */,
+				DE4F85A4280C376200DDF782 /* NeedleFoundation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,6 +212,7 @@
 				DE72C9AE27BCD75E005E6A14 /* AddPaymentMethodImp */,
 				DEE97ADE27C25B0D006FC20C /* AddPaymentMethod */,
 				DE04283527F03EAC0094FC7A /* CleanSwiftUtil */,
+				DE4F85A3280C376200DDF782 /* NeedleFoundation */,
 			);
 			productName = SuperRedApp;
 			productReference = F5829F5526DB2BC400BFA8CD /* MiniSuperApp.app */;
@@ -240,7 +243,7 @@
 			mainGroup = F5829F4C26DB2BC400BFA8CD;
 			packageReferences = (
 				DEC1AE40276A0AA60024D730 /* XCRemoteSwiftPackageReference "CombineExt" */,
-				DEEE9F3E280C0E4B002AF745 /* XCRemoteSwiftPackageReference "needle" */,
+				DE4F85A2280C376200DDF782 /* XCRemoteSwiftPackageReference "needle" */,
 			);
 			productRefGroup = F5829F5626DB2BC400BFA8CD /* Products */;
 			projectDirPath = "";
@@ -497,20 +500,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		DE4F85A2280C376200DDF782 /* XCRemoteSwiftPackageReference "needle" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/uber/needle.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		DEC1AE40276A0AA60024D730 /* XCRemoteSwiftPackageReference "CombineExt" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/CombineCommunity/CombineExt.git";
 			requirement = {
 				kind = exactVersion;
 				version = 1.5.1;
-			};
-		};
-		DEEE9F3E280C0E4B002AF745 /* XCRemoteSwiftPackageReference "needle" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/uber/needle.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.18.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -531,6 +534,11 @@
 		DE3BDC6827BC87C500EFFC47 /* Topup */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Topup;
+		};
+		DE4F85A3280C376200DDF782 /* NeedleFoundation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DE4F85A2280C376200DDF782 /* XCRemoteSwiftPackageReference "needle" */;
+			productName = NeedleFoundation;
 		};
 		DE72C9AE27BCD75E005E6A14 /* AddPaymentMethodImp */ = {
 			isa = XCSwiftPackageProductDependency;
