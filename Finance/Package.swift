@@ -40,7 +40,6 @@ let package = Package(
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
-        .package(name: "ModernRIBs", url: "https://github.com/DevYeom/ModernRIBs", from: "1.0.1"),
         .package(name: "Platform", path: "../Platform")
     ],
     targets: [
@@ -79,14 +78,13 @@ let package = Package(
         .target(
             name: "Topup",
             dependencies: [
-                "ModernRIBs"
+                .product(name: "CleanSwiftUtil", package: "Platform"),
             ]
         ),
         .target(
             name: "TopupImp",
             dependencies: [
                 "Topup",
-                "ModernRIBs",
                 "FinanceEntity",
                 "FinanceRepository",
                 "AddPaymentMethod",
@@ -99,7 +97,6 @@ let package = Package(
         .target(
             name: "FinanceHome",
             dependencies: [
-                "ModernRIBs",
                 "FinanceEntity",
                 "FinanceRepository",
                 "AddPaymentMethod",

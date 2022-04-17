@@ -1,5 +1,5 @@
 import Foundation
-import ModernRIBs
+import CleanSwiftUtil
 
 final class AppComponent: Component<EmptyDependency>, AppRootDependency {
 

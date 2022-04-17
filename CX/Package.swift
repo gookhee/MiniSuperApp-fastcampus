@@ -15,7 +15,6 @@ let package = Package(
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
-        .package(name: "ModernRIBs", url: "https://github.com/DevYeom/ModernRIBs", from: "1.0.1"),
         .package(name: "Finance", path: "../Finance"),
         .package(name: "Transport", path: "../Transport"),
         .package(name: "Platform", path: "../Platform")
@@ -26,7 +25,6 @@ let package = Package(
         .target(
             name: "AppHome",
             dependencies: [
-                "ModernRIBs",
                 .product(name: "TransportHome", package: "Transport"),
                 .product(name: "FinanceRepository", package: "Finance"),
                 .product(name: "SuperUI", package: "Platform")

@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import ModernRIBs
 import FinanceRepository
 import FinanceHome
 import AppHome
@@ -18,6 +17,7 @@ import TopupImp
 import UIKit
 import AddPaymentMethod
 import AddPaymentMethodImp
+import CleanSwiftUtil
 
 final class AppRootComponent: Component<AppRootDependency>, AppHomeDependency, FinanceHomeDependency, ProfileHomeDependency, TransportHomeDependency, TopupDependency, AddPaymentMethodDependency {
     let superPayRepository: SuperPayRepositoryAvailable
