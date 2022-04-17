@@ -11,6 +11,8 @@
 		DE0F302E27BCAB5E00754F6C /* ProfileHome in Frameworks */ = {isa = PBXBuildFile; productRef = DE0F302D27BCAB5E00754F6C /* ProfileHome */; };
 		DE3BDC6727BC7B9300EFFC47 /* SuperUI in Frameworks */ = {isa = PBXBuildFile; productRef = DE3BDC6627BC7B9300EFFC47 /* SuperUI */; };
 		DE3BDC6927BC87C500EFFC47 /* Topup in Frameworks */ = {isa = PBXBuildFile; productRef = DE3BDC6827BC87C500EFFC47 /* Topup */; };
+		DE5D5E30280C028E003C1686 /* NeedleGenerated.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE5D5E2F280C028E003C1686 /* NeedleGenerated.swift */; };
+		DE6730B8280BF80900AACD35 /* copyright_header.txt in Resources */ = {isa = PBXBuildFile; fileRef = DE6730B7280BF80900AACD35 /* copyright_header.txt */; };
 		DE72C9AF27BCD75E005E6A14 /* AddPaymentMethodImp in Frameworks */ = {isa = PBXBuildFile; productRef = DE72C9AE27BCD75E005E6A14 /* AddPaymentMethodImp */; };
 		DE8DD39C27BC904C004764D9 /* FoundationExt in Frameworks */ = {isa = PBXBuildFile; productRef = DE8DD39B27BC904C004764D9 /* FoundationExt */; };
 		DE8DD39E27BC953F004764D9 /* FinanceHome in Frameworks */ = {isa = PBXBuildFile; productRef = DE8DD39D27BC953F004764D9 /* FinanceHome */; };
@@ -39,6 +41,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DE5D5E2F280C028E003C1686 /* NeedleGenerated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NeedleGenerated.swift; sourceTree = "<group>"; };
+		DE6730B7280BF80900AACD35 /* copyright_header.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = copyright_header.txt; sourceTree = "<group>"; };
 		DE6D623027B9133900EB5D89 /* CX */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = CX; sourceTree = "<group>"; };
 		DE6D623127B9134D00EB5D89 /* Transport */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Transport; sourceTree = "<group>"; };
 		DE6D623227B9137700EB5D89 /* Finance */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Finance; sourceTree = "<group>"; };
@@ -88,6 +92,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DE6730B5280BF7C100AACD35 /* DI */ = {
+			isa = PBXGroup;
+			children = (
+				DE6730B6280BF7C600AACD35 /* Needle */,
+			);
+			path = DI;
+			sourceTree = "<group>";
+		};
+		DE6730B6280BF7C600AACD35 /* Needle */ = {
+			isa = PBXGroup;
+			children = (
+				DE5D5E2F280C028E003C1686 /* NeedleGenerated.swift */,
+				DE6730B7280BF80900AACD35 /* copyright_header.txt */,
+			);
+			path = Needle;
+			sourceTree = "<group>";
+		};
 		DEB6DEF027BBA67A0045EBB4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -121,6 +142,7 @@
 		F5829F5726DB2BC400BFA8CD /* MiniSuperApp */ = {
 			isa = PBXGroup;
 			children = (
+				DE6730B5280BF7C100AACD35 /* DI */,
 				F5829F7A26DB3AF900BFA8CD /* AppDelegate */,
 				F5829F6F26DB33CF00BFA8CD /* AppRoot */,
 				F5829F6126DB2BC500BFA8CD /* Assets.xcassets */,
@@ -161,6 +183,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F5829F6926DB2BC500BFA8CD /* Build configuration list for PBXNativeTarget "MiniSuperApp" */;
 			buildPhases = (
+				DE6730B4280BF32400AACD35 /*  Needle */,
 				F5829F5126DB2BC400BFA8CD /* Sources */,
 				F5829F5226DB2BC400BFA8CD /* Frameworks */,
 				F5829F5326DB2BC400BFA8CD /* Resources */,
@@ -235,10 +258,32 @@
 				F5829F6526DB2BC500BFA8CD /* LaunchScreen.storyboard in Resources */,
 				DEF6C0B02798FF8E00C0D08E /* miniSuperApp.swiftformat in Resources */,
 				F5829F6226DB2BC500BFA8CD /* Assets.xcassets in Resources */,
+				DE6730B8280BF80900AACD35 /* copyright_header.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		DE6730B4280BF32400AACD35 /*  Needle */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = " Needle";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which needle; then\n    #SOURCEKIT_LOGGING=0 && needle generate iOS/NeedleGenerated.swift iOS/\n    needle generate MiniSuperApp/DI/Needle/NeedleGenerated.swift MiniSuperApp/ --header-doc MiniSuperApp/DI/Needle/copyright_header.txt\nelse\n  echo \"warning: Needle not installed, download from https://github.com/uber/needle using Homebrew\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		F5829F5126DB2BC400BFA8CD /* Sources */ = {
@@ -255,6 +300,7 @@
 				DEE3284A27F1CA320034F170 /* AppRootInteractor.swift in Sources */,
 				DEE3284427F1CA320034F170 /* AppRootPresenter.swift in Sources */,
 				DEE3284527F1CA320034F170 /* AppRootWorker.swift in Sources */,
+				DE5D5E30280C028E003C1686 /* NeedleGenerated.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
