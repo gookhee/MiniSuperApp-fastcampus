@@ -17,9 +17,9 @@ import TopupImp
 import UIKit
 import AddPaymentMethod
 import AddPaymentMethodImp
-import CleanSwiftUtil
+import NeedleFoundation
 
-final class AppRootComponent: CleanSwiftComponent<AppRootDependency>, AppHomeDependency, FinanceHomeDependency, ProfileHomeDependency, TransportHomeDependency, TopupDependency, AddPaymentMethodDependency {
+final class AppRootModuleComponent: Component<AppRootModuleDependency>, AppRootModuleBuildable, AppHomeDependency, FinanceHomeDependency, ProfileHomeDependency, TransportHomeDependency, TopupDependency, AddPaymentMethodDependency {
     let superPayRepository: SuperPayRepositoryAvailable
     let cardOnFileRepository: CardOnFileRepositoryAvailable
     
@@ -45,4 +45,20 @@ final class AppRootComponent: CleanSwiftComponent<AppRootDependency>, AppHomeDep
         super.init(dependency: dependency)
     }
     // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
+    
+    var appRootBuilder: AppRootBuildingLogic {
+        
+    }
+}
+
+// MARK: - AppRootModuleBuildable
+
+protocol AppRootModuleBuildable {
+    var appRootBuilder: AppRootBuildingLogic { get }
+}
+
+// MARK: - AppRootModuleDependency
+
+protocol AppRootModuleDependency {
+     
 }
