@@ -1,10 +1,7 @@
-import Foundation
-import CleanSwiftUtil
+import NeedleFoundation
 
-final class AppComponent: CleanSwiftComponent<CleanSwiftEmptyDependency>, AppRootDependency {
-
-    init() {
-        super.init(dependency: CleanSwiftEmptyComponent())
+final class AppComponent: BootstrapComponent {
+    var appRootModuleBuilder: AppRootModuleBuildable {
+        AppRootModuleComponent(parent: self)
     }
-
 }

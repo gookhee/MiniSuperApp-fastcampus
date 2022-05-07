@@ -10,8 +10,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let window = UIWindow(frame: UIScreen.main.bounds)
         self.window = window
         
-        let viewController = AppRootBuilder(dependency: AppComponent())
-            .build(listener: nil)
+        let appComponent = AppComponent()
+        let viewController = appComponent.appRootModuleBuilder.appRootBuilder.build(listener: nil)
         window.rootViewController = viewController
         window.makeKeyAndVisible()
         

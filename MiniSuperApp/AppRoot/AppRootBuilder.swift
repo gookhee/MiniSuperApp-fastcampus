@@ -29,9 +29,7 @@ public final class AppRootBuilder: Builder<AppRootDependency> {
 extension AppRootBuilder: AppRootBuildingLogic {
     public func build(listener: AppRootListener?) -> Destination {
         let component = AppRootComponent(
-            dependency: dependency,
-            superPayRepository: SuperPayRepository(),
-            cardOnFileRepository: CardOnFileRepository()
+            dependency: dependency
         )
         let interactor = AppRootInteractor(
             worker: AppRootWorker(),
