@@ -17,7 +17,7 @@ import AddPaymentMethod
 import AddPaymentMethodImp
 import NeedleFoundation
 
-public final class AppRootBuilder: Component<AppRootDependency>, FinanceHomeDependency {
+public final class AppRootBuilder: Component<AppRootDependency> {
     public var superPayRepository: SuperPayRepositoryAvailable { SuperPayRepository() }
     public var cardOnFileRepository: CardOnFileRepositoryAvailable { CardOnFileRepository() }
     

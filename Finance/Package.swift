@@ -104,6 +104,7 @@ let package = Package(
                 .product(name: "SuperUI", package: "Platform"),
                 .product(name: "FoundationExt", package: "Platform"),
                 .product(name: "CleanSwiftUtil", package: "Platform"),
+                .product(name: "NeedleFoundationUtil", package: "Platform"),
             ]
         ),
     ]

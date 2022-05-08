@@ -18,8 +18,6 @@ import AppHome
 import ProfileHome
 import NeedleFoundation
 
-// MARK: - AppRootBuilder
-
 // MARK: - AppRootBuildingLogic
 
 extension AppRootBuilder: AppRootBuildingLogic {
@@ -29,7 +27,7 @@ extension AppRootBuilder: AppRootBuildingLogic {
             listener: listener
         )
         let appHome = AppHomeBuilder(parent: self)
-        let financeHome = FinanceHomeBuilder(dependency: self)
+        let financeHome = FinanceHomeBuilder(parent: self)
         let profileHome = ProfileHomeBuilder(parent: self)
 
         let viewController = AppRootViewController(

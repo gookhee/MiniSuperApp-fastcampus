@@ -56,6 +56,9 @@ public func registerProviderFactories() {
     __DependencyProviderRegistry.instance.registerDependencyProviderFactory(for: "^->AppComponent->AppRootBuilder->TopupBuilder") { component in
         return TopupDependency53480cc7ff6d4b968404Provider(component: component)
     }
+    __DependencyProviderRegistry.instance.registerDependencyProviderFactory(for: "^->AppComponent->AppRootBuilder->FinanceHomeBuilder") { component in
+        return FinanceHomeDependency2036faa74baf60cb3b27Provider(component: component)
+    }
     __DependencyProviderRegistry.instance.registerDependencyProviderFactory(for: "^->AppComponent->AppRootBuilder->AppHomeBuilder") { component in
         return AppHomeDependencyd7aa6a600f725039513eProvider(component: component)
     }
@@ -143,6 +146,30 @@ private class TopupDependency53480cc7ff6d4b968404BaseProvider: TopupDependency {
 }
 /// ^->AppComponent->AppRootBuilder->TopupBuilder
 private class TopupDependency53480cc7ff6d4b968404Provider: TopupDependency53480cc7ff6d4b968404BaseProvider {
+    init(component: NeedleFoundation.Scope) {
+        super.init(appRootBuilder: component.parent as! AppRootBuilder)
+    }
+}
+private class FinanceHomeDependency2036faa74baf60cb3b27BaseProvider: FinanceHomeDependency {
+    var superPayRepository: SuperPayRepositoryAvailable {
+        return appRootBuilder.superPayRepository
+    }
+    var cardOnFileRepository: CardOnFileRepositoryAvailable {
+        return appRootBuilder.cardOnFileRepository
+    }
+    var topupBuildable: TopupBuildingLogic {
+        return appRootBuilder.topupBuildable
+    }
+    var addPaymentMethodBuildable: AddPaymentMethodBuildingLogic {
+        return appRootBuilder.addPaymentMethodBuildable
+    }
+    private let appRootBuilder: AppRootBuilder
+    init(appRootBuilder: AppRootBuilder) {
+        self.appRootBuilder = appRootBuilder
+    }
+}
+/// ^->AppComponent->AppRootBuilder->FinanceHomeBuilder
+private class FinanceHomeDependency2036faa74baf60cb3b27Provider: FinanceHomeDependency2036faa74baf60cb3b27BaseProvider {
     init(component: NeedleFoundation.Scope) {
         super.init(appRootBuilder: component.parent as! AppRootBuilder)
     }

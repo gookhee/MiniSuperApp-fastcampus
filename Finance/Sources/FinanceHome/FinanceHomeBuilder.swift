@@ -18,34 +18,38 @@ import FinanceRepository
 import CombineUtil
 import Topup
 import CleanSwiftUtil
+import NeedleFoundation
 
 // MARK: - FinanceHomeBuilder
 
-public final class FinanceHomeBuilder: Builder<FinanceHomeDependency> {
-
+public final class FinanceHomeBuilder: Component<FinanceHomeDependency>, SuperPayDashboardDependency, CardOnFileDashboardDependency {
+    var cardOnFileRepository: CardOnFileRepositoryAvailable { dependency.cardOnFileRepository }
+    
+    /// 자식리블렛에서는 값을 읽기전용 타입을 넘김
+    var balance: ReadOnlyCurrentValuePublisher<Double> { dependency.superPayRepository.balance }
 }
+
 
 // MARK: - FinanceHomeBuildingLogic
 
 extension FinanceHomeBuilder: FinanceHomeBuildingLogic {
     public func build(withListener listener: FinanceHomeListener) -> Destination {
-        let component = FinanceHomeComponent(dependency: dependency)
         let interactor = FinanceHomeInteractor(
             worker: FinanceHomeWorker(),
             listener: listener
         )
         let presenter = FinanceHomePresenter()
-        let superPayDashboard = SuperPayDashboardBuilder(dependency: component)
+        let superPayDashboard = SuperPayDashboardBuilder(dependency: self)
             .build(withListener: interactor)
-        let cardOnFileDashboard = CardOnFileDashboardBuilder(dependency: component)
+        let cardOnFileDashboard = CardOnFileDashboardBuilder(dependency: self)
             .build(withListener: interactor)
         let viewController = FinanceHomeViewController(
             dashboards: [superPayDashboard, cardOnFileDashboard]
         )
         let router = FinanceHomeRouter(
             viewController: viewController,
-            addPaymentMethodBuildable: component.addPaymentMethodBuildable,
-            topupBuildable: component.topupBuildable
+            addPaymentMethodBuildable: dependency.addPaymentMethodBuildable,
+            topupBuildable: dependency.topupBuildable
         )
         viewController.interactor = interactor
         interactor.router = router
@@ -67,24 +71,11 @@ public protocol FinanceHomeBuildingLogic {
 
 // MARK: - FinanceHomeDependency
 
-public protocol FinanceHomeDependency: CleanSwiftDependency {
+public protocol FinanceHomeDependency: Dependency {
     // TODO: Declare the set of dependencies required by this RIB, but cannot be
     // created by this RIB.
     var superPayRepository: SuperPayRepositoryAvailable { get }
     var cardOnFileRepository: CardOnFileRepositoryAvailable { get }
     var topupBuildable: TopupBuildingLogic { get }
     var addPaymentMethodBuildable: AddPaymentMethodBuildingLogic { get }
-}
-
-// MARK: - FinanceHomeComponent
-
-/// 자식리블렛의 의존성을 여기서 충족시켜줘야함
-final class FinanceHomeComponent: CleanSwiftComponent<FinanceHomeDependency>, SuperPayDashboardDependency, CardOnFileDashboardDependency {
-    var cardOnFileRepository: CardOnFileRepositoryAvailable { dependency.cardOnFileRepository }
-    var superPayRepository: SuperPayRepositoryAvailable { dependency.superPayRepository }
-    var topupBuildable: TopupBuildingLogic { dependency.topupBuildable }
-    var addPaymentMethodBuildable: AddPaymentMethodBuildingLogic { dependency.addPaymentMethodBuildable }
-
-    /// 자식리블렛에서는 값을 읽기전용 타입을 넘김
-    var balance: ReadOnlyCurrentValuePublisher<Double> { superPayRepository.balance }
 }
