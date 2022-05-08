@@ -8,8 +8,6 @@
 import Foundation
 import FinanceRepository
 import FinanceHome
-import AppHome
-import ProfileHome
 import TransportHome
 import TransportHomeImp
 import Topup
@@ -19,7 +17,7 @@ import AddPaymentMethod
 import AddPaymentMethodImp
 import NeedleFoundation
 
-public final class AppRootBuilder: Component<AppRootDependency>, AppHomeDependency, FinanceHomeDependency, ProfileHomeDependency, TransportHomeDependency, TopupDependency, AddPaymentMethodDependency {
+public final class AppRootBuilder: Component<AppRootDependency>, FinanceHomeDependency, TransportHomeDependency, TopupDependency, AddPaymentMethodDependency {
     public var superPayRepository: SuperPayRepositoryAvailable { SuperPayRepository() }
     public var cardOnFileRepository: CardOnFileRepositoryAvailable { CardOnFileRepository() }
     
