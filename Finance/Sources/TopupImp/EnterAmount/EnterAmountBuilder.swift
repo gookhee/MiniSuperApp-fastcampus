@@ -16,24 +16,29 @@ import CleanSwiftUtil
 import CombineUtil
 import FinanceEntity
 import FinanceRepository
+import NeedleFoundation
 
 // MARK: - EnterAmountBuilder
 
-final class EnterAmountBuilder: Builder<EnterAmountDependency> {
+final class EnterAmountBuilder: Component<EnterAmountDependency>, EnterAmountInteractorDependency {
+    var superPayRepository: SuperPayRepositoryAvailable { dependency.superPayRepository }
 
+    var selectedPaymentMethod: ReadOnlyCurrentValuePublisher<PaymentMethod> {
+        dependency.selectedPaymentMethod
+    }
 }
+
 
 // MARK: - EnterAmountBuildingLogic
 
 extension EnterAmountBuilder: EnterAmountBuildingLogic {
     
     func build(withListener listener: EnterAmountListener) -> Destination {
-        let component = EnterAmountComponent(dependency: dependency)
         let viewController = EnterAmountViewController()
         let interactor = EnterAmountInteractor(
             worker: EnterAmountWorker(),
             listener: listener,
-            dependency: component
+            dependency: self
         )
         let presenter = EnterAmountPresenter()
         let router = EnterAmountRouter(viewController: viewController)
@@ -56,22 +61,9 @@ protocol EnterAmountBuildingLogic {
 
 // MARK: - EnterAmountDependency
 
-protocol EnterAmountDependency: CleanSwiftDependency {
+public protocol EnterAmountDependency: Dependency {
     // TODO: Declare the set of dependencies required by this RIB, but cannot be
     // created by this RIB.
     var selectedPaymentMethod: ReadOnlyCurrentValuePublisher<PaymentMethod>  { get }
     var superPayRepository: SuperPayRepositoryAvailable { get }
-}
-
-// MARK: - EnterAmountComponent
-
-final class EnterAmountComponent: CleanSwiftComponent<EnterAmountDependency>, EnterAmountInteractorDependency {
-    var superPayRepository: SuperPayRepositoryAvailable { dependency.superPayRepository }
-
-    var selectedPaymentMethod: ReadOnlyCurrentValuePublisher<PaymentMethod> {
-        dependency.selectedPaymentMethod
-    }
-
-    // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
-
 }

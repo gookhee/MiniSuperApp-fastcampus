@@ -25,9 +25,9 @@ import NeedleFoundation
 public final class TopupBuilder: Component<TopupDependency>, TopupInteractorDependency, EnterAmountDependency, CardOnFileDependency {
     var cardOnFileRepository: CardOnFileRepositoryAvailable { dependency.cardOnFileRepository }
     
-    var superPayRepository: SuperPayRepositoryAvailable { dependency.superPayRepository }
+    public var superPayRepository: SuperPayRepositoryAvailable { dependency.superPayRepository }
     
-    var selectedPaymentMethod: ReadOnlyCurrentValuePublisher<PaymentMethod> { paymentMethodStream }
+    public var selectedPaymentMethod: ReadOnlyCurrentValuePublisher<PaymentMethod> { paymentMethodStream }
 
     var paymentMethodStream: CurrentValuePublisher<PaymentMethod> {
         CurrentValuePublisher(PaymentMethod(id: "", name: "", digits: "", color: "", isPrimary: false))
@@ -43,7 +43,7 @@ extension TopupBuilder: TopupBuildingLogic {
         topupBaseViewController: TopupBaseViewControllable
     ) -> Destination {
         let interactor = TopupInteractor(worker: TopupWorker(), listener: listener, dependency: self)
-        let enterAmountBuilder = EnterAmountBuilder(dependency: self)
+        let enterAmountBuilder = EnterAmountBuilder(parent: self)
         let cardOnFileBuilder = CardOnFileBuilder(parent: self)
         let router = TopupRouter(
             viewController: topupBaseViewController,
