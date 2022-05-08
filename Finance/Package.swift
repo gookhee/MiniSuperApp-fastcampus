@@ -61,6 +61,7 @@ let package = Package(
                 "FinanceRepository",
                 .product(name: "SuperUI", package: "Platform"),
                 .product(name: "CleanSwiftUtil", package: "Platform"),
+                .product(name: "NeedleFoundationUtil", package: "Platform"),
             ]
         ),
         .target(

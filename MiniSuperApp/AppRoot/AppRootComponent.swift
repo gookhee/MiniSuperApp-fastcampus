@@ -17,7 +17,7 @@ import AddPaymentMethod
 import AddPaymentMethodImp
 import NeedleFoundation
 
-public final class AppRootBuilder: Component<AppRootDependency>, FinanceHomeDependency, TopupDependency, AddPaymentMethodDependency {
+public final class AppRootBuilder: Component<AppRootDependency>, FinanceHomeDependency, TopupDependency {
     public var superPayRepository: SuperPayRepositoryAvailable { SuperPayRepository() }
     public var cardOnFileRepository: CardOnFileRepositoryAvailable { CardOnFileRepository() }
     
@@ -30,6 +30,6 @@ public final class AppRootBuilder: Component<AppRootDependency>, FinanceHomeDepe
     }()
     
     lazy public var addPaymentMethodBuildable: AddPaymentMethodBuildingLogic = {
-       AddPaymentMethodBuilder(dependency: self)
+       AddPaymentMethodBuilder(parent: self)
     }()
 }

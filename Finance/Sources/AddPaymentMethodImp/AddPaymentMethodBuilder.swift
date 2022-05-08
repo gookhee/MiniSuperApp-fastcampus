@@ -16,18 +16,22 @@ import FinanceRepository
 import SuperUI
 import AddPaymentMethod
 import CleanSwiftUtil
+import NeedleFoundation
 
 // MARK: - AddPaymentMethodBuilder
 
-public final class AddPaymentMethodBuilder: Builder<AddPaymentMethodDependency>, AddPaymentMethodBuildingLogic {
+public final class AddPaymentMethodBuilder: Component<AddPaymentMethodDependency>, AddPaymentMethodInteractorDependency {
+    var cardOnFileRepository: CardOnFileRepositoryAvailable { dependency.cardOnFileRepository }
+}
+
+extension AddPaymentMethodBuilder: AddPaymentMethodBuildingLogic {
     public func build(listener: AddPaymentMethodListener, closeButtonType: DismissButtonType) -> UIViewController {
         let viewController = AddPaymentMethodViewController(closeButtonType: closeButtonType)
         let worker = AddPaymentMethodWorker()
-        let component = AddPaymentMethodComponent(dependency: dependency)
         let interactor = AddPaymentMethodInteractor(
             worker: worker,
             listener: listener,
-            dependency: component
+            dependency: self
         )
         interactor.router = AddPaymentMethodRouter(viewController: viewController)
         viewController.interactor = interactor
@@ -38,16 +42,9 @@ public final class AddPaymentMethodBuilder: Builder<AddPaymentMethodDependency>,
 
 // MARK: - AddPaymentMethodDependency
 
-public protocol AddPaymentMethodDependency {
+public protocol AddPaymentMethodDependency: Dependency {
     // TODO: Declare the set of dependencies required by this RIB, but cannot be
     // created by this RIB.
     var cardOnFileRepository: CardOnFileRepositoryAvailable { get }
-}
-
-// MARK: - AddPaymentMethodComponent
-
-final class AddPaymentMethodComponent:CleanSwiftComponent<AddPaymentMethodDependency>, AddPaymentMethodInteractorDependency {
-    // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
-    var cardOnFileRepository: CardOnFileRepositoryAvailable { dependency.cardOnFileRepository }
 }
 

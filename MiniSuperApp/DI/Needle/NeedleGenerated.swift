@@ -24,6 +24,7 @@ import FinanceRepository
 import Foundation
 import NeedleFoundation
 import ProfileHome
+import SuperUI
 import Topup
 import TopupImp
 import TransportHome
@@ -47,6 +48,9 @@ public func registerProviderFactories() {
     }
     __DependencyProviderRegistry.instance.registerDependencyProviderFactory(for: "^->AppComponent->AppRootBuilder->ProfileHomeBuilder") { component in
         return ProfileHomeDependency61241a7b21e0a17364f8Provider(component: component)
+    }
+    __DependencyProviderRegistry.instance.registerDependencyProviderFactory(for: "^->AppComponent->AppRootBuilder->AddPaymentMethodBuilder") { component in
+        return AddPaymentMethodDependency4a47be77669ea982f0cdProvider(component: component)
     }
     __DependencyProviderRegistry.instance.registerDependencyProviderFactory(for: "^->AppComponent->AppRootBuilder->AppHomeBuilder") { component in
         return AppHomeDependencyd7aa6a600f725039513eProvider(component: component)
@@ -101,6 +105,21 @@ private class ProfileHomeDependency61241a7b21e0a17364f8BaseProvider: ProfileHome
 private class ProfileHomeDependency61241a7b21e0a17364f8Provider: ProfileHomeDependency61241a7b21e0a17364f8BaseProvider {
     init(component: NeedleFoundation.Scope) {
         super.init()
+    }
+}
+private class AddPaymentMethodDependency4a47be77669ea982f0cdBaseProvider: AddPaymentMethodDependency {
+    var cardOnFileRepository: CardOnFileRepositoryAvailable {
+        return appRootBuilder.cardOnFileRepository
+    }
+    private let appRootBuilder: AppRootBuilder
+    init(appRootBuilder: AppRootBuilder) {
+        self.appRootBuilder = appRootBuilder
+    }
+}
+/// ^->AppComponent->AppRootBuilder->AddPaymentMethodBuilder
+private class AddPaymentMethodDependency4a47be77669ea982f0cdProvider: AddPaymentMethodDependency4a47be77669ea982f0cdBaseProvider {
+    init(component: NeedleFoundation.Scope) {
+        super.init(appRootBuilder: component.parent as! AppRootBuilder)
     }
 }
 private class AppHomeDependencyd7aa6a600f725039513eBaseProvider: AppHomeDependency {
