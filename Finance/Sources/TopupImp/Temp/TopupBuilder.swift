@@ -30,7 +30,9 @@ public final class TopupBuilder: Component<TopupDependency>, TopupInteractorDepe
     public var selectedPaymentMethod: ReadOnlyCurrentValuePublisher<PaymentMethod> { paymentMethodStream }
 
     var paymentMethodStream: CurrentValuePublisher<PaymentMethod> {
-        CurrentValuePublisher(PaymentMethod(id: "", name: "", digits: "", color: "", isPrimary: false))
+        shared {
+            CurrentValuePublisher(PaymentMethod(id: "", name: "", digits: "", color: "", isPrimary: false))
+        }
     }
 }
 
