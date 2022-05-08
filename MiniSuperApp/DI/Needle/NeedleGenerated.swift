@@ -19,6 +19,7 @@ import AddPaymentMethodImp
 import AppHome
 import CleanSwiftUtil
 import CombineUtil
+import FinanceEntity
 import FinanceHome
 import FinanceRepository
 import Foundation
@@ -51,6 +52,9 @@ public func registerProviderFactories() {
     }
     __DependencyProviderRegistry.instance.registerDependencyProviderFactory(for: "^->AppComponent->AppRootBuilder->AddPaymentMethodBuilder") { component in
         return AddPaymentMethodDependency4a47be77669ea982f0cdProvider(component: component)
+    }
+    __DependencyProviderRegistry.instance.registerDependencyProviderFactory(for: "^->AppComponent->AppRootBuilder->TopupBuilder") { component in
+        return TopupDependency53480cc7ff6d4b968404Provider(component: component)
     }
     __DependencyProviderRegistry.instance.registerDependencyProviderFactory(for: "^->AppComponent->AppRootBuilder->AppHomeBuilder") { component in
         return AppHomeDependencyd7aa6a600f725039513eProvider(component: component)
@@ -118,6 +122,27 @@ private class AddPaymentMethodDependency4a47be77669ea982f0cdBaseProvider: AddPay
 }
 /// ^->AppComponent->AppRootBuilder->AddPaymentMethodBuilder
 private class AddPaymentMethodDependency4a47be77669ea982f0cdProvider: AddPaymentMethodDependency4a47be77669ea982f0cdBaseProvider {
+    init(component: NeedleFoundation.Scope) {
+        super.init(appRootBuilder: component.parent as! AppRootBuilder)
+    }
+}
+private class TopupDependency53480cc7ff6d4b968404BaseProvider: TopupDependency {
+    var cardOnFileRepository: CardOnFileRepositoryAvailable {
+        return appRootBuilder.cardOnFileRepository
+    }
+    var superPayRepository: SuperPayRepositoryAvailable {
+        return appRootBuilder.superPayRepository
+    }
+    var addPaymentMethodBuildable: AddPaymentMethodBuildingLogic {
+        return appRootBuilder.addPaymentMethodBuildable
+    }
+    private let appRootBuilder: AppRootBuilder
+    init(appRootBuilder: AppRootBuilder) {
+        self.appRootBuilder = appRootBuilder
+    }
+}
+/// ^->AppComponent->AppRootBuilder->TopupBuilder
+private class TopupDependency53480cc7ff6d4b968404Provider: TopupDependency53480cc7ff6d4b968404BaseProvider {
     init(component: NeedleFoundation.Scope) {
         super.init(appRootBuilder: component.parent as! AppRootBuilder)
     }

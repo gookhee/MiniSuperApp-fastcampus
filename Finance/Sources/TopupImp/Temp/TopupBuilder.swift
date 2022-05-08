@@ -18,12 +18,22 @@ import CombineUtil
 import AddPaymentMethod
 import FinanceEntity
 import Topup
+import NeedleFoundation
 
 // MARK: - TopupBuilder
 
-public final class TopupBuilder: Builder<TopupDependency> {
+public final class TopupBuilder: Component<TopupDependency>, TopupInteractorDependency, EnterAmountDependency, CardOnFileDependency {
+    var cardOnFileRepository: CardOnFileRepositoryAvailable { dependency.cardOnFileRepository }
+    
+    var superPayRepository: SuperPayRepositoryAvailable { dependency.superPayRepository }
+    
+    var selectedPaymentMethod: ReadOnlyCurrentValuePublisher<PaymentMethod> { paymentMethodStream }
 
+    var paymentMethodStream: CurrentValuePublisher<PaymentMethod> {
+        CurrentValuePublisher(PaymentMethod(id: "", name: "", digits: "", color: "", isPrimary: false))
+    }
 }
+
 
 // MARK: - TopupBuildingLogic
 
@@ -32,14 +42,12 @@ extension TopupBuilder: TopupBuildingLogic {
         withListener listener: TopupListener,
         topupBaseViewController: TopupBaseViewControllable
     ) -> Destination {
-        let paymentMethodStream = CurrentValuePublisher(PaymentMethod(id: "", name: "", digits: "", color: "", isPrimary: false))
-        let component = TopupComponent(dependency: dependency, paymentMethodStream: paymentMethodStream)
-        let interactor = TopupInteractor(worker: TopupWorker(), listener: listener, dependency: component)
-        let enterAmountBuilder = EnterAmountBuilder(dependency: component)
-        let cardOnFileBuilder = CardOnFileBuilder(dependency: component)
+        let interactor = TopupInteractor(worker: TopupWorker(), listener: listener, dependency: self)
+        let enterAmountBuilder = EnterAmountBuilder(dependency: self)
+        let cardOnFileBuilder = CardOnFileBuilder(dependency: self)
         let router = TopupRouter(
             viewController: topupBaseViewController,
-            addPaymentMethodBuildable: component.addPaymentMethodBuildable,
+            addPaymentMethodBuildable: dependency.addPaymentMethodBuildable,
             enterAmountBuildable: enterAmountBuilder,
             cardOnFileBuildable: cardOnFileBuilder
         )
@@ -51,32 +59,11 @@ extension TopupBuilder: TopupBuildingLogic {
 
 // MARK: - TopupDependency
 
-public protocol TopupDependency: CleanSwiftDependency {
+public protocol TopupDependency: Dependency {
     // TODO: Make sure to convert the variable into lower-camelcase.
     // TODO: Declare the set of dependencies required by this RIB, but won't be
     // created by this RIB.
     var cardOnFileRepository: CardOnFileRepositoryAvailable { get }
     var superPayRepository: SuperPayRepositoryAvailable { get }
     var addPaymentMethodBuildable: AddPaymentMethodBuildingLogic { get }
-}
-
-// MARK - TopupComponent
-
-final class TopupComponent: CleanSwiftComponent<TopupDependency>, TopupInteractorDependency, EnterAmountDependency, CardOnFileDependency {
-    var superPayRepository: SuperPayRepositoryAvailable { dependency.superPayRepository }
-    var cardOnFileRepository: CardOnFileRepositoryAvailable { dependency.cardOnFileRepository }
-    var selectedPaymentMethod: ReadOnlyCurrentValuePublisher<PaymentMethod> { paymentMethodStream }
-    var addPaymentMethodBuildable: AddPaymentMethodBuildingLogic { dependency.addPaymentMethodBuildable }
-
-    let paymentMethodStream: CurrentValuePublisher<PaymentMethod>
-
-    init(
-        dependency: TopupDependency,
-        paymentMethodStream: CurrentValuePublisher<PaymentMethod>
-    ) {
-        self.paymentMethodStream = paymentMethodStream
-        super.init(dependency: dependency)
-    }
-
-    // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
 }
