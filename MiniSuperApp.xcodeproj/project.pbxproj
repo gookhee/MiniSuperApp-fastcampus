@@ -291,7 +291,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which needle; then\n    #SOURCEKIT_LOGGING=0 && needle generate iOS/NeedleGenerated.swift iOS/\n    needle generate MiniSuperApp/DI/Needle/NeedleGenerated.swift MiniSuperApp/ --header-doc MiniSuperApp/DI/Needle/copyright_header.txt\nelse\n  echo \"warning: Needle not installed, download from https://github.com/uber/needle using Homebrew\"\nfi\n";
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which needle; then\n    #SOURCEKIT_LOGGING=0 && needle generate iOS/NeedleGenerated.swift iOS/\n    needle generate MiniSuperApp/DI/Needle/NeedleGenerated.swift . --header-doc MiniSuperApp/DI/Needle/copyright_header.txt\nelse\n  echo \"warning: Needle not installed, download from https://github.com/uber/needle using Homebrew\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
