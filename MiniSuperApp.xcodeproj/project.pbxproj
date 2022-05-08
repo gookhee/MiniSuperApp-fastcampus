@@ -13,7 +13,6 @@
 		DE3BDC6927BC87C500EFFC47 /* Topup in Frameworks */ = {isa = PBXBuildFile; productRef = DE3BDC6827BC87C500EFFC47 /* Topup */; };
 		DE4F85A4280C376200DDF782 /* NeedleFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = DE4F85A3280C376200DDF782 /* NeedleFoundation */; };
 		DE4F85A6280C3F4100DDF782 /* ModuleBuildable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4F85A5280C3F4100DDF782 /* ModuleBuildable.swift */; };
-		DE4F85AA280C440400DDF782 /* AppRootModuleComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4F85A9280C440400DDF782 /* AppRootModuleComponent.swift */; };
 		DE5D5E30280C028E003C1686 /* NeedleGenerated.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE5D5E2F280C028E003C1686 /* NeedleGenerated.swift */; };
 		DE6730B8280BF80900AACD35 /* copyright_header.txt in Resources */ = {isa = PBXBuildFile; fileRef = DE6730B7280BF80900AACD35 /* copyright_header.txt */; };
 		DE72C9AF27BCD75E005E6A14 /* AddPaymentMethodImp in Frameworks */ = {isa = PBXBuildFile; productRef = DE72C9AE27BCD75E005E6A14 /* AddPaymentMethodImp */; };
@@ -45,7 +44,6 @@
 
 /* Begin PBXFileReference section */
 		DE4F85A5280C3F4100DDF782 /* ModuleBuildable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleBuildable.swift; sourceTree = "<group>"; };
-		DE4F85A9280C440400DDF782 /* AppRootModuleComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRootModuleComponent.swift; sourceTree = "<group>"; };
 		DE5D5E2F280C028E003C1686 /* NeedleGenerated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NeedleGenerated.swift; sourceTree = "<group>"; };
 		DE6730B7280BF80900AACD35 /* copyright_header.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = copyright_header.txt; sourceTree = "<group>"; };
 		DE6D623027B9133900EB5D89 /* CX */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = CX; sourceTree = "<group>"; };
@@ -152,7 +150,6 @@
 				DE6730B5280BF7C100AACD35 /* DI */,
 				F5829F7A26DB3AF900BFA8CD /* AppDelegate */,
 				F5829F6F26DB33CF00BFA8CD /* AppRoot */,
-				DE4F85A9280C440400DDF782 /* AppRootModuleComponent.swift */,
 				F5829F6126DB2BC500BFA8CD /* Assets.xcassets */,
 				F5829F6326DB2BC500BFA8CD /* LaunchScreen.storyboard */,
 				F5829F6626DB2BC500BFA8CD /* Info.plist */,
@@ -304,7 +301,6 @@
 				DEE3284727F1CA320034F170 /* AppRootModels.swift in Sources */,
 				DEE3284927F1CA320034F170 /* AppRootBuilder.swift in Sources */,
 				F5829F5926DB2BC400BFA8CD /* AppDelegate.swift in Sources */,
-				DE4F85AA280C440400DDF782 /* AppRootModuleComponent.swift in Sources */,
 				DEE3284827F1CA320034F170 /* AppRootViewController.swift in Sources */,
 				F5829F7926DB397300BFA8CD /* AppComponent.swift in Sources */,
 				DE909EC127BCBF1400EF95BB /* AppRootComponent.swift in Sources */,

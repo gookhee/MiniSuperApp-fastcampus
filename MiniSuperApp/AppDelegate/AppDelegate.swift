@@ -11,7 +11,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = window
         
         let appComponent = AppComponent()
-        let viewController = appComponent.appRootModuleBuilder.appRootBuilder.build(listener: nil)
+        let viewController = appComponent.appRootBuildable.build(listener: nil)
         window.rootViewController = viewController
         window.makeKeyAndVisible()
         

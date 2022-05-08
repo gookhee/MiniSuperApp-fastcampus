@@ -14,8 +14,19 @@
 //  limitations under the License.
 //
 
+import AddPaymentMethod
+import AddPaymentMethodImp
+import AppHome
+import FinanceHome
+import FinanceRepository
 import Foundation
 import NeedleFoundation
+import ProfileHome
+import Topup
+import TopupImp
+import TransportHome
+import TransportHomeImp
+import UIKit
 
 // swiftlint:disable unused_declaration
 private let needleDependenciesHash : String? = nil
@@ -23,26 +34,26 @@ private let needleDependenciesHash : String? = nil
 // MARK: - Registration
 
 public func registerProviderFactories() {
-    __DependencyProviderRegistry.instance.registerDependencyProviderFactory(for: "^->AppComponent->AppRootModuleComponent") { component in
-        return AppRootModuleDependencya6454dbe926f425bc76aProvider(component: component)
-    }
     __DependencyProviderRegistry.instance.registerDependencyProviderFactory(for: "^->AppComponent") { component in
         return EmptyDependencyProvider(component: component)
+    }
+    __DependencyProviderRegistry.instance.registerDependencyProviderFactory(for: "^->AppComponent->AppRootBuilder") { component in
+        return AppRootDependencye8b8e4c3df015f34c868Provider(component: component)
     }
     
 }
 
 // MARK: - Providers
 
-private class AppRootModuleDependencya6454dbe926f425bc76aBaseProvider: AppRootModuleDependency {
+private class AppRootDependencye8b8e4c3df015f34c868BaseProvider: AppRootDependency {
 
 
     init() {
 
     }
 }
-/// ^->AppComponent->AppRootModuleComponent
-private class AppRootModuleDependencya6454dbe926f425bc76aProvider: AppRootModuleDependencya6454dbe926f425bc76aBaseProvider {
+/// ^->AppComponent->AppRootBuilder
+private class AppRootDependencye8b8e4c3df015f34c868Provider: AppRootDependencye8b8e4c3df015f34c868BaseProvider {
     init(component: NeedleFoundation.Scope) {
         super.init()
     }

@@ -16,28 +16,21 @@ import FinanceRepository
 import FinanceHome
 import AppHome
 import ProfileHome
-import CleanSwiftUtil
+import NeedleFoundation
 
 // MARK: - AppRootBuilder
-
-public final class AppRootBuilder: Builder<AppRootDependency> {
-
-}
 
 // MARK: - AppRootBuildingLogic
 
 extension AppRootBuilder: AppRootBuildingLogic {
     public func build(listener: AppRootListener?) -> Destination {
-        let component = AppRootComponent(
-            dependency: dependency
-        )
         let interactor = AppRootInteractor(
             worker: AppRootWorker(),
             listener: listener
         )
-        let appHome = AppHomeBuilder(dependency: component)
-        let financeHome = FinanceHomeBuilder(dependency: component)
-        let profileHome = ProfileHomeBuilder(dependency: component)
+        let appHome = AppHomeBuilder(dependency: self)
+        let financeHome = FinanceHomeBuilder(dependency: self)
+        let profileHome = ProfileHomeBuilder(dependency: self)
 
         let viewController = AppRootViewController(
             appHomeViewController:
@@ -68,7 +61,7 @@ public protocol AppRootBuildingLogic {
 
 // MARK: - AppRootDependency
 
-public protocol AppRootDependency: CleanSwiftDependency {
+public protocol AppRootDependency: Dependency {
     // TODO: Declare the set of dependencies required by this RIB, but cannot be
     // created by this RIB.
 }
