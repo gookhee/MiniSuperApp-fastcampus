@@ -18,8 +18,12 @@ import AddPaymentMethodImp
 import NeedleFoundation
 
 public final class AppRootBuilder: Component<AppRootDependency> {
-    public var superPayRepository: SuperPayRepositoryAvailable { SuperPayRepository() }
-    public var cardOnFileRepository: CardOnFileRepositoryAvailable { CardOnFileRepository() }
+    public var superPayRepository: SuperPayRepositoryAvailable {
+        shared { SuperPayRepository() }
+    }
+    public var cardOnFileRepository: CardOnFileRepositoryAvailable {
+        shared { CardOnFileRepository() }
+    }
     
     lazy public var transportHomeBuildable: TransportHomeBuildingLogic = {
        TransportHomeBuilder(parent: self)
