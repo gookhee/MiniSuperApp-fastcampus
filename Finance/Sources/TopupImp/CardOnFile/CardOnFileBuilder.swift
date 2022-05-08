@@ -14,10 +14,11 @@ import UIKit
 
 import CleanSwiftUtil
 import FinanceEntity
+import NeedleFoundation
 
 // MARK: - CardOnFileBuilder
 
-final class CardOnFileBuilder: Builder<CardOnFileDependency> {
+final class CardOnFileBuilder: Component<CardOnFileDependency> {
 
 }
 
@@ -26,7 +27,6 @@ final class CardOnFileBuilder: Builder<CardOnFileDependency> {
 extension CardOnFileBuilder: CardOnFileBuildingLogic {
     
     func build(listener: CardOnFileListener, paymentMethods: [PaymentMethod]) -> Destination {
-        let component = CardOnFileComponent(dependency: dependency)
         let viewController = CardOnFileViewController()
         let interactor = CardOnFileInteractor(worker: CardOnFileWorker(), paymentMethods: paymentMethods)
         let presenter = CardOnFilePresenter()
@@ -52,14 +52,7 @@ protocol CardOnFileBuildingLogic: Buildable {
 
 // MARK: - CardOnFileDependency
 
-protocol CardOnFileDependency: CleanSwiftDependency {
+public protocol CardOnFileDependency: Dependency {
     // TODO: Declare the set of dependencies required by this RIB, but cannot be
     // created by this RIB.
-}
-
-// MARK: - CardOnFileComponent
-
-final class CardOnFileComponent: CleanSwiftComponent<CardOnFileDependency> {
-
-    // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
 }

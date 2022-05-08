@@ -56,6 +56,9 @@ public func registerProviderFactories() {
     __DependencyProviderRegistry.instance.registerDependencyProviderFactory(for: "^->AppComponent->AppRootBuilder->TopupBuilder") { component in
         return TopupDependency53480cc7ff6d4b968404Provider(component: component)
     }
+    __DependencyProviderRegistry.instance.registerDependencyProviderFactory(for: "^->AppComponent->AppRootBuilder->TopupBuilder->CardOnFileBuilder") { component in
+        return CardOnFileDependencyf9ab4d710775f2593c29Provider(component: component)
+    }
     __DependencyProviderRegistry.instance.registerDependencyProviderFactory(for: "^->AppComponent->AppRootBuilder->FinanceHomeBuilder->SuperPayDashboardBuilder") { component in
         return SuperPayDashboardDependency08a6a11265fc323b5062Provider(component: component)
     }
@@ -154,6 +157,19 @@ private class TopupDependency53480cc7ff6d4b968404BaseProvider: TopupDependency {
 private class TopupDependency53480cc7ff6d4b968404Provider: TopupDependency53480cc7ff6d4b968404BaseProvider {
     init(component: NeedleFoundation.Scope) {
         super.init(appRootBuilder: component.parent as! AppRootBuilder)
+    }
+}
+private class CardOnFileDependencyf9ab4d710775f2593c29BaseProvider: CardOnFileDependency {
+
+
+    init() {
+
+    }
+}
+/// ^->AppComponent->AppRootBuilder->TopupBuilder->CardOnFileBuilder
+private class CardOnFileDependencyf9ab4d710775f2593c29Provider: CardOnFileDependencyf9ab4d710775f2593c29BaseProvider {
+    init(component: NeedleFoundation.Scope) {
+        super.init()
     }
 }
 private class SuperPayDashboardDependency08a6a11265fc323b5062BaseProvider: SuperPayDashboardDependency {

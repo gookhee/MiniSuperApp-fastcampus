@@ -44,7 +44,7 @@ extension TopupBuilder: TopupBuildingLogic {
     ) -> Destination {
         let interactor = TopupInteractor(worker: TopupWorker(), listener: listener, dependency: self)
         let enterAmountBuilder = EnterAmountBuilder(dependency: self)
-        let cardOnFileBuilder = CardOnFileBuilder(dependency: self)
+        let cardOnFileBuilder = CardOnFileBuilder(parent: self)
         let router = TopupRouter(
             viewController: topupBaseViewController,
             addPaymentMethodBuildable: dependency.addPaymentMethodBuildable,
