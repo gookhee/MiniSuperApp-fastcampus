@@ -23,7 +23,8 @@ let package = Package(
         .target(
             name: "ProfileHome",
             dependencies: [
-                .product(name: "CleanSwiftUtil", package: "Platform")
+                .product(name: "CleanSwiftUtil", package: "Platform"),
+                .product(name: "NeedleFoundationUtil", package: "Platform")
             ])
     ]
 )
