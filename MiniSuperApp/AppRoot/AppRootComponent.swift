@@ -17,12 +17,12 @@ import AddPaymentMethod
 import AddPaymentMethodImp
 import NeedleFoundation
 
-public final class AppRootBuilder: Component<AppRootDependency>, FinanceHomeDependency, TransportHomeDependency, TopupDependency, AddPaymentMethodDependency {
+public final class AppRootBuilder: Component<AppRootDependency>, FinanceHomeDependency, TopupDependency, AddPaymentMethodDependency {
     public var superPayRepository: SuperPayRepositoryAvailable { SuperPayRepository() }
     public var cardOnFileRepository: CardOnFileRepositoryAvailable { CardOnFileRepository() }
     
     lazy public var transportHomeBuildable: TransportHomeBuildingLogic = {
-       TransportHomeBuilder(dependency: self)
+       TransportHomeBuilder(parent: self)
     }()
     
     lazy public var topupBuildable: TopupBuildingLogic = {

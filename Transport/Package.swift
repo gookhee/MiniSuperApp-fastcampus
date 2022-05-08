@@ -37,7 +37,8 @@ let package = Package(
                 .product(name: "Topup", package: "Finance"),
                 .product(name: "CombineUtil", package: "Platform"),
                 .product(name: "SuperUI", package: "Platform"),
-                .product(name: "FoundationExt", package: "Platform")
+                .product(name: "FoundationExt", package: "Platform"),
+                .product(name: "NeedleFoundationUtil", package: "Platform"),
             ],
             resources: [
                 .process("Resource")

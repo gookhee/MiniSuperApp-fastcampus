@@ -18,6 +18,7 @@ import AddPaymentMethod
 import AddPaymentMethodImp
 import AppHome
 import CleanSwiftUtil
+import CombineUtil
 import FinanceHome
 import FinanceRepository
 import Foundation
@@ -35,6 +36,9 @@ private let needleDependenciesHash : String? = nil
 // MARK: - Registration
 
 public func registerProviderFactories() {
+    __DependencyProviderRegistry.instance.registerDependencyProviderFactory(for: "^->AppComponent->AppRootBuilder->TransportHomeBuilder") { component in
+        return TransportHomeDependency66d6c53f06d8c3d01feeProvider(component: component)
+    }
     __DependencyProviderRegistry.instance.registerDependencyProviderFactory(for: "^->AppComponent") { component in
         return EmptyDependencyProvider(component: component)
     }
@@ -52,6 +56,27 @@ public func registerProviderFactories() {
 
 // MARK: - Providers
 
+private class TransportHomeDependency66d6c53f06d8c3d01feeBaseProvider: TransportHomeDependency {
+    var superPayRepository: SuperPayRepositoryAvailable {
+        return appRootBuilder.superPayRepository
+    }
+    var cardOnFileRepository: CardOnFileRepositoryAvailable {
+        return appRootBuilder.cardOnFileRepository
+    }
+    var topupBuildable: TopupBuildingLogic {
+        return appRootBuilder.topupBuildable
+    }
+    private let appRootBuilder: AppRootBuilder
+    init(appRootBuilder: AppRootBuilder) {
+        self.appRootBuilder = appRootBuilder
+    }
+}
+/// ^->AppComponent->AppRootBuilder->TransportHomeBuilder
+private class TransportHomeDependency66d6c53f06d8c3d01feeProvider: TransportHomeDependency66d6c53f06d8c3d01feeBaseProvider {
+    init(component: NeedleFoundation.Scope) {
+        super.init(appRootBuilder: component.parent as! AppRootBuilder)
+    }
+}
 private class AppRootDependencye8b8e4c3df015f34c868BaseProvider: AppRootDependency {
 
 

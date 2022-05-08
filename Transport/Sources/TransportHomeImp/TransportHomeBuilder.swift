@@ -17,28 +17,28 @@ import FinanceRepository
 import Topup
 import TransportHome
 import CleanSwiftUtil
+import NeedleFoundation
 
 // MARK: - TransportHomeBuilder
 
-public final class TransportHomeBuilder: Builder<TransportHomeDependency> {
-    
+public final class TransportHomeBuilder: Component<TransportHomeDependency>, TransportHomeInteractorDependency {
+    var superPayBalance: ReadOnlyCurrentValuePublisher<Double> { dependency.superPayRepository.balance }
 }
 
 // MARK: - TransportHomeBuildingLogic
 
 extension TransportHomeBuilder: TransportHomeBuildingLogic {
     public func build(withListener listener: TransportHomeListener) -> Destination {
-        let component = TransportHomeComponent(dependency: dependency)
         let viewController = TransportHomeViewController()
         let interactor = TransportHomeInteractor(
             worker: TransportHomeWorker(),
-            dependency: component,
+            dependency: self,
             listener: listener
         )
         let presenter = TransportHomePresenter()
         let router = TransportHomeRouter(
             viewController: viewController,
-            topupBuildable: component.topupBuildable
+            topupBuildable: dependency.topupBuildable
         )
         viewController.interactor = interactor
         interactor.router = router
@@ -51,18 +51,8 @@ extension TransportHomeBuilder: TransportHomeBuildingLogic {
 
 // MARK: - TransportHomeDependency
 
-public protocol TransportHomeDependency: CleanSwiftDependency {
+public protocol TransportHomeDependency: Dependency {
     var superPayRepository: SuperPayRepositoryAvailable { get }
     var cardOnFileRepository: CardOnFileRepositoryAvailable { get }
     var topupBuildable: TopupBuildingLogic { get }
-}
-
-// MARK: - TransportHomeComponent
-
-final class TransportHomeComponent: CleanSwiftComponent<TransportHomeDependency>, TransportHomeInteractorDependency {
-    var cardOnFileRepository: CardOnFileRepositoryAvailable { dependency.cardOnFileRepository }
-    
-    var superPayRepository: SuperPayRepositoryAvailable { dependency.superPayRepository }
-    var superPayBalance: ReadOnlyCurrentValuePublisher<Double> { dependency.superPayRepository.balance }
-    var topupBuildable: TopupBuildingLogic { dependency.topupBuildable }
 }
