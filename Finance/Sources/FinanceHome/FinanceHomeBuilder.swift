@@ -26,7 +26,7 @@ public final class FinanceHomeBuilder: Component<FinanceHomeDependency>, SuperPa
     public var cardOnFileRepository: CardOnFileRepositoryAvailable { dependency.cardOnFileRepository }
     
     /// 자식리블렛에서는 값을 읽기전용 타입을 넘김
-    var balance: ReadOnlyCurrentValuePublisher<Double> { dependency.superPayRepository.balance }
+    public var balance: ReadOnlyCurrentValuePublisher<Double> { dependency.superPayRepository.balance }
 }
 
 
@@ -39,7 +39,7 @@ extension FinanceHomeBuilder: FinanceHomeBuildingLogic {
             listener: listener
         )
         let presenter = FinanceHomePresenter()
-        let superPayDashboard = SuperPayDashboardBuilder(dependency: self)
+        let superPayDashboard = SuperPayDashboardBuilder(parent: self)
             .build(withListener: interactor)
         let cardOnFileDashboard = CardOnFileDashboardBuilder(parent: self)
             .build(withListener: interactor)

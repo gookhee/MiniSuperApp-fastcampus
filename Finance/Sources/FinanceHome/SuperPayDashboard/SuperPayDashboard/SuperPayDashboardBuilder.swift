@@ -18,25 +18,27 @@ import AddPaymentMethod
 import FinanceRepository
 import CombineUtil
 import Topup
+import NeedleFoundation
 
 // MARK: - SuperPayDashboardBuilder
 
-final class SuperPayDashboardBuilder: Builder<SuperPayDashboardDependency> {
-
+final class SuperPayDashboardBuilder: Component<SuperPayDashboardDependency>, SuperPayDashboardInteractorDependency {
+    var balance: ReadOnlyCurrentValuePublisher<Double> {
+        dependency.balance
+    }
 }
+
 
 // MARK: - SuperPayDashboardBuildingLogic
 
 extension SuperPayDashboardBuilder: SuperPayDashboardBuildingLogic {
     
     func build(withListener listener: SuperPayDashboardListener) -> Destination {
-        let component = SuperPayDashboardComponent(dependency: dependency)
-        
         let viewController = SuperPayDashboardViewController()
         let interactor = SuperPayDashboardInteractor(
             worker: SuperPayDashboardWorker(),
             listener: listener,
-            dependency: component
+            dependency: self
         )
         let presenter = SuperPayDashboardPresenter()
         let router = SuperPayDashboardRouter(viewController: viewController)
@@ -63,16 +65,6 @@ protocol SuperPayDashboardBuildingLogic {
 /// 잔고(balance publisher)는 빌더에서 빌드할때 받을 수 도 있고, 부모로부터 받을 수 도 있다.
 /// 이 리블렛을 화면의 일부의 뷰를 담당하고,  거의 뷰를 그리는 역할을 하는 작은 부모한테 받는 것이 적합
 /// 부모로 부터 받는 의존성은 SuperPayDashboardDependency에 정의해주면 됨
-protocol SuperPayDashboardDependency: CleanSwiftDependency {
+public protocol SuperPayDashboardDependency: Dependency {
     var balance: ReadOnlyCurrentValuePublisher<Double> { get }
-}
-
-// MARK: - SuperPayDashboardComponent
-
-final class SuperPayDashboardComponent: CleanSwiftComponent<SuperPayDashboardDependency>, SuperPayDashboardInteractorDependency{
-    var balance: ReadOnlyCurrentValuePublisher<Double> {
-        dependency.balance
-    }
-
-    // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
 }

@@ -56,6 +56,9 @@ public func registerProviderFactories() {
     __DependencyProviderRegistry.instance.registerDependencyProviderFactory(for: "^->AppComponent->AppRootBuilder->TopupBuilder") { component in
         return TopupDependency53480cc7ff6d4b968404Provider(component: component)
     }
+    __DependencyProviderRegistry.instance.registerDependencyProviderFactory(for: "^->AppComponent->AppRootBuilder->FinanceHomeBuilder->SuperPayDashboardBuilder") { component in
+        return SuperPayDashboardDependency08a6a11265fc323b5062Provider(component: component)
+    }
     __DependencyProviderRegistry.instance.registerDependencyProviderFactory(for: "^->AppComponent->AppRootBuilder->FinanceHomeBuilder") { component in
         return FinanceHomeDependency2036faa74baf60cb3b27Provider(component: component)
     }
@@ -151,6 +154,21 @@ private class TopupDependency53480cc7ff6d4b968404BaseProvider: TopupDependency {
 private class TopupDependency53480cc7ff6d4b968404Provider: TopupDependency53480cc7ff6d4b968404BaseProvider {
     init(component: NeedleFoundation.Scope) {
         super.init(appRootBuilder: component.parent as! AppRootBuilder)
+    }
+}
+private class SuperPayDashboardDependency08a6a11265fc323b5062BaseProvider: SuperPayDashboardDependency {
+    var balance: ReadOnlyCurrentValuePublisher<Double> {
+        return financeHomeBuilder.balance
+    }
+    private let financeHomeBuilder: FinanceHomeBuilder
+    init(financeHomeBuilder: FinanceHomeBuilder) {
+        self.financeHomeBuilder = financeHomeBuilder
+    }
+}
+/// ^->AppComponent->AppRootBuilder->FinanceHomeBuilder->SuperPayDashboardBuilder
+private class SuperPayDashboardDependency08a6a11265fc323b5062Provider: SuperPayDashboardDependency08a6a11265fc323b5062BaseProvider {
+    init(component: NeedleFoundation.Scope) {
+        super.init(financeHomeBuilder: component.parent as! FinanceHomeBuilder)
     }
 }
 private class FinanceHomeDependency2036faa74baf60cb3b27BaseProvider: FinanceHomeDependency {
