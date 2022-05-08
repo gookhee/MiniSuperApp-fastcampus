@@ -14,23 +14,23 @@ import UIKit
 
 import CleanSwiftUtil
 import FinanceRepository
+import NeedleFoundation
 
 // MARK: - CardOnFileDashboardBuilder
 
-final class CardOnFileDashboardBuilder: Builder<CardOnFileDashboardDependency> {
-
+final class CardOnFileDashboardBuilder: Component<CardOnFileDashboardDependency>, CardOnFileDashboardInteractorDependency {
+    var cardOnFileRepository: CardOnFileRepositoryAvailable { dependency.cardOnFileRepository }
 }
 
 // MARK: - CardOnFileDashboardBuildingLogic
 
 extension CardOnFileDashboardBuilder: CardOnFileDashboardBuildingLogic {
     func build(withListener listener: CardOnFileDashboardListener) -> Destination {
-        let component = CardOnFileDashboardComponent(dependency: dependency)
         let viewController = CardOnFileDashboardViewController()
         let interactor = CardOnFileDashboardInteractor(
             worker: CardOnFileDashboardWorker(),
             listener: listener,
-            dependency: component
+            dependency: self
         )
         let presenter = CardOnFileDashboardPresenter()
         let router = CardOnFileDashboardRouter(viewController: viewController)
@@ -41,7 +41,6 @@ extension CardOnFileDashboardBuilder: CardOnFileDashboardBuildingLogic {
 
         return viewController
     }
-
 }
 
 // MARK: - CardOnFileDashboardBuildingLogic definition
@@ -54,12 +53,6 @@ protocol CardOnFileDashboardBuildingLogic {
 
 // MARK: - CardOnFileDashboardDependency
 
-protocol CardOnFileDashboardDependency: CleanSwiftDependency {
+public protocol CardOnFileDashboardDependency: Dependency {
     var cardOnFileRepository: CardOnFileRepositoryAvailable { get }
-}
-
-// MARK: - CardOnFileDashboardComponent
-
-final class CardOnFileDashboardComponent: CleanSwiftComponent<CardOnFileDashboardDependency>, CardOnFileDashboardInteractorDependency{
-    var cardOnFileRepository: CardOnFileRepositoryAvailable { dependency.cardOnFileRepository }
 }

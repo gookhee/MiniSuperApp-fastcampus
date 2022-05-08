@@ -23,7 +23,7 @@ import NeedleFoundation
 // MARK: - FinanceHomeBuilder
 
 public final class FinanceHomeBuilder: Component<FinanceHomeDependency>, SuperPayDashboardDependency, CardOnFileDashboardDependency {
-    var cardOnFileRepository: CardOnFileRepositoryAvailable { dependency.cardOnFileRepository }
+    public var cardOnFileRepository: CardOnFileRepositoryAvailable { dependency.cardOnFileRepository }
     
     /// 자식리블렛에서는 값을 읽기전용 타입을 넘김
     var balance: ReadOnlyCurrentValuePublisher<Double> { dependency.superPayRepository.balance }
@@ -41,7 +41,7 @@ extension FinanceHomeBuilder: FinanceHomeBuildingLogic {
         let presenter = FinanceHomePresenter()
         let superPayDashboard = SuperPayDashboardBuilder(dependency: self)
             .build(withListener: interactor)
-        let cardOnFileDashboard = CardOnFileDashboardBuilder(dependency: self)
+        let cardOnFileDashboard = CardOnFileDashboardBuilder(parent: self)
             .build(withListener: interactor)
         let viewController = FinanceHomeViewController(
             dashboards: [superPayDashboard, cardOnFileDashboard]

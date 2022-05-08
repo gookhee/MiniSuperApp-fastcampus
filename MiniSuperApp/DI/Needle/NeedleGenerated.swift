@@ -59,6 +59,9 @@ public func registerProviderFactories() {
     __DependencyProviderRegistry.instance.registerDependencyProviderFactory(for: "^->AppComponent->AppRootBuilder->FinanceHomeBuilder") { component in
         return FinanceHomeDependency2036faa74baf60cb3b27Provider(component: component)
     }
+    __DependencyProviderRegistry.instance.registerDependencyProviderFactory(for: "^->AppComponent->AppRootBuilder->FinanceHomeBuilder->CardOnFileDashboardBuilder") { component in
+        return CardOnFileDashboardDependency3067ad8865723a6741f1Provider(component: component)
+    }
     __DependencyProviderRegistry.instance.registerDependencyProviderFactory(for: "^->AppComponent->AppRootBuilder->AppHomeBuilder") { component in
         return AppHomeDependencyd7aa6a600f725039513eProvider(component: component)
     }
@@ -172,6 +175,21 @@ private class FinanceHomeDependency2036faa74baf60cb3b27BaseProvider: FinanceHome
 private class FinanceHomeDependency2036faa74baf60cb3b27Provider: FinanceHomeDependency2036faa74baf60cb3b27BaseProvider {
     init(component: NeedleFoundation.Scope) {
         super.init(appRootBuilder: component.parent as! AppRootBuilder)
+    }
+}
+private class CardOnFileDashboardDependency3067ad8865723a6741f1BaseProvider: CardOnFileDashboardDependency {
+    var cardOnFileRepository: CardOnFileRepositoryAvailable {
+        return financeHomeBuilder.cardOnFileRepository
+    }
+    private let financeHomeBuilder: FinanceHomeBuilder
+    init(financeHomeBuilder: FinanceHomeBuilder) {
+        self.financeHomeBuilder = financeHomeBuilder
+    }
+}
+/// ^->AppComponent->AppRootBuilder->FinanceHomeBuilder->CardOnFileDashboardBuilder
+private class CardOnFileDashboardDependency3067ad8865723a6741f1Provider: CardOnFileDashboardDependency3067ad8865723a6741f1BaseProvider {
+    init(component: NeedleFoundation.Scope) {
+        super.init(financeHomeBuilder: component.parent as! FinanceHomeBuilder)
     }
 }
 private class AppHomeDependencyd7aa6a600f725039513eBaseProvider: AppHomeDependency {
