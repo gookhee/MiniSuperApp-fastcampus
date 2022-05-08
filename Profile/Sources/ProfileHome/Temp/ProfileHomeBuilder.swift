@@ -13,10 +13,11 @@
 import UIKit
 
 import CleanSwiftUtil
+import NeedleFoundation
 
 // MARK: - ProfileHomeBuilder
 
-public final class ProfileHomeBuilder: Builder<ProfileHomeDependency> {
+public final class ProfileHomeBuilder: Component<ProfileHomeDependency> {
 
 }
 
@@ -25,7 +26,6 @@ public final class ProfileHomeBuilder: Builder<ProfileHomeDependency> {
 extension ProfileHomeBuilder: ProfileHomeBuildingLogic {
     
     public func build(withListener listener: ProfileHomeListener) -> Destination {
-        let _ = ProfileHomeComponent(dependency: dependency)
         let viewController = ProfileHomeViewController()
         let interactor = ProfileHomeInteractor(worker: ProfileHomeWorker(), listener: listener)
         let presenter = ProfileHomePresenter()
@@ -50,16 +50,9 @@ public protocol ProfileHomeBuildingLogic {
 
 // MARK: - ProfileHomeDependency
 
-public protocol ProfileHomeDependency: CleanSwiftDependency {
+public protocol ProfileHomeDependency: Dependency {
     // TODO: Declare the set of dependencies required by this RIB, but cannot be
     // created by this RIB.
-}
-
-// MARK: - ProfileHomeComponent
-
-final class ProfileHomeComponent: CleanSwiftComponent<ProfileHomeDependency> {
-
-    // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
 }
 
 // MARK: - ProfileHomeListener

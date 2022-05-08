@@ -17,6 +17,7 @@
 import AddPaymentMethod
 import AddPaymentMethodImp
 import AppHome
+import CleanSwiftUtil
 import FinanceHome
 import FinanceRepository
 import Foundation
@@ -40,6 +41,9 @@ public func registerProviderFactories() {
     __DependencyProviderRegistry.instance.registerDependencyProviderFactory(for: "^->AppComponent->AppRootBuilder") { component in
         return AppRootDependencye8b8e4c3df015f34c868Provider(component: component)
     }
+    __DependencyProviderRegistry.instance.registerDependencyProviderFactory(for: "^->AppComponent->AppRootBuilder->ProfileHomeBuilder") { component in
+        return ProfileHomeDependency61241a7b21e0a17364f8Provider(component: component)
+    }
     
 }
 
@@ -54,6 +58,19 @@ private class AppRootDependencye8b8e4c3df015f34c868BaseProvider: AppRootDependen
 }
 /// ^->AppComponent->AppRootBuilder
 private class AppRootDependencye8b8e4c3df015f34c868Provider: AppRootDependencye8b8e4c3df015f34c868BaseProvider {
+    init(component: NeedleFoundation.Scope) {
+        super.init()
+    }
+}
+private class ProfileHomeDependency61241a7b21e0a17364f8BaseProvider: ProfileHomeDependency {
+
+
+    init() {
+
+    }
+}
+/// ^->AppComponent->AppRootBuilder->ProfileHomeBuilder
+private class ProfileHomeDependency61241a7b21e0a17364f8Provider: ProfileHomeDependency61241a7b21e0a17364f8BaseProvider {
     init(component: NeedleFoundation.Scope) {
         super.init()
     }

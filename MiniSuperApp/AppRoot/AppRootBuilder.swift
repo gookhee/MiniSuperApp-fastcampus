@@ -30,7 +30,7 @@ extension AppRootBuilder: AppRootBuildingLogic {
         )
         let appHome = AppHomeBuilder(dependency: self)
         let financeHome = FinanceHomeBuilder(dependency: self)
-        let profileHome = ProfileHomeBuilder(dependency: self)
+        let profileHome = ProfileHomeBuilder(parent: self)
 
         let viewController = AppRootViewController(
             appHomeViewController:

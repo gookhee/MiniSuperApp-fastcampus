@@ -24,7 +24,7 @@ let package = Package(
             name: "ProfileHome",
             dependencies: [
                 .product(name: "CleanSwiftUtil", package: "Platform"),
-                .product(name: "NeedleFoundationUtil", package: "Platform")
+                .product(name: "NeedleFoundationUtil", package: "Platform"),
             ])
     ]
 )
