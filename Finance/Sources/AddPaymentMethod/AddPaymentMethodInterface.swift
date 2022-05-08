@@ -13,7 +13,7 @@ import CleanSwiftUtil
 
 // MARK: - AddPaymentMethodBuildingLogic definition
 
-public protocol AddPaymentMethodBuildingLogic: Buildable {
+public protocol AddPaymentMethodBuildingLogic {
     /// 자유롭게 매개변수 추가하기 (Add parameters freely)
     func build(listener: AddPaymentMethodListener, closeButtonType: DismissButtonType) -> UIViewController
 }

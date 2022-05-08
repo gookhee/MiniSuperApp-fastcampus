@@ -44,7 +44,7 @@ extension CardOnFileBuilder: CardOnFileBuildingLogic {
 
 // MARK: - CardOnFileBuildingLogic definition
 
-protocol CardOnFileBuildingLogic: Buildable {
+protocol CardOnFileBuildingLogic {
     typealias Destination = CardOnFileViewController
     /// 자유롭게 매개변수 추가하기 (Add parameters freely)
     func build(listener: CardOnFileListener, paymentMethods: [PaymentMethod]) -> Destination

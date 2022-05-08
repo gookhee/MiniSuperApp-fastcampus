@@ -12,7 +12,7 @@ import CleanSwiftUtil
 
 // MARK: - TopupBuildingLogic definition
 
-public protocol TopupBuildingLogic: Buildable {
+public protocol TopupBuildingLogic {
     typealias Destination = ViewlessInteracting
     
     func build(
