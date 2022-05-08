@@ -44,6 +44,9 @@ public func registerProviderFactories() {
     __DependencyProviderRegistry.instance.registerDependencyProviderFactory(for: "^->AppComponent->AppRootBuilder->ProfileHomeBuilder") { component in
         return ProfileHomeDependency61241a7b21e0a17364f8Provider(component: component)
     }
+    __DependencyProviderRegistry.instance.registerDependencyProviderFactory(for: "^->AppComponent->AppRootBuilder->AppHomeBuilder") { component in
+        return AppHomeDependencyd7aa6a600f725039513eProvider(component: component)
+    }
     
 }
 
@@ -73,5 +76,26 @@ private class ProfileHomeDependency61241a7b21e0a17364f8BaseProvider: ProfileHome
 private class ProfileHomeDependency61241a7b21e0a17364f8Provider: ProfileHomeDependency61241a7b21e0a17364f8BaseProvider {
     init(component: NeedleFoundation.Scope) {
         super.init()
+    }
+}
+private class AppHomeDependencyd7aa6a600f725039513eBaseProvider: AppHomeDependency {
+    var superPayRepository: SuperPayRepositoryAvailable {
+        return appRootBuilder.superPayRepository
+    }
+    var cardOnFileRepository: CardOnFileRepositoryAvailable {
+        return appRootBuilder.cardOnFileRepository
+    }
+    var transportHomeBuildable: TransportHomeBuildingLogic {
+        return appRootBuilder.transportHomeBuildable
+    }
+    private let appRootBuilder: AppRootBuilder
+    init(appRootBuilder: AppRootBuilder) {
+        self.appRootBuilder = appRootBuilder
+    }
+}
+/// ^->AppComponent->AppRootBuilder->AppHomeBuilder
+private class AppHomeDependencyd7aa6a600f725039513eProvider: AppHomeDependencyd7aa6a600f725039513eBaseProvider {
+    init(component: NeedleFoundation.Scope) {
+        super.init(appRootBuilder: component.parent as! AppRootBuilder)
     }
 }

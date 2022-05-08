@@ -27,7 +27,8 @@ let package = Package(
             dependencies: [
                 .product(name: "TransportHome", package: "Transport"),
                 .product(name: "FinanceRepository", package: "Finance"),
-                .product(name: "SuperUI", package: "Platform")
+                .product(name: "SuperUI", package: "Platform"),
+                .product(name: "NeedleFoundationUtil", package: "Platform"),
             ])
     ]
 )

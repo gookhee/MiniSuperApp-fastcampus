@@ -28,7 +28,7 @@ extension AppRootBuilder: AppRootBuildingLogic {
             worker: AppRootWorker(),
             listener: listener
         )
-        let appHome = AppHomeBuilder(dependency: self)
+        let appHome = AppHomeBuilder(parent: self)
         let financeHome = FinanceHomeBuilder(dependency: self)
         let profileHome = ProfileHomeBuilder(parent: self)
 

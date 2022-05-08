@@ -15,12 +15,11 @@ import UIKit
 import FinanceRepository
 import TransportHome
 import CleanSwiftUtil
+import NeedleFoundation
 
 // MARK: - AppHomeBuilder
 
-public final class AppHomeBuilder: Builder<AppHomeDependency> {
-
-}
+public final class AppHomeBuilder: Component<AppHomeDependency> {}
 
 // MARK: - AppHomeBuildingLogic
 
@@ -53,16 +52,8 @@ public protocol AppHomeBuildingLogic {
 
 // MARK: - AppHomeDependency
 
-public protocol AppHomeDependency: CleanSwiftDependency {
+public protocol AppHomeDependency: Dependency {
     var superPayRepository: SuperPayRepositoryAvailable { get }
     var cardOnFileRepository: CardOnFileRepositoryAvailable { get }
     var transportHomeBuildable: TransportHomeBuildingLogic{ get }
-}
-
-// MARK: - AppHomeComponent
-
-final class AppHomeComponent: CleanSwiftComponent<AppHomeDependency> {
-    var cardOnFileRepository: CardOnFileRepositoryAvailable { dependency.cardOnFileRepository }
-    var superPayRepository: SuperPayRepositoryAvailable { dependency.superPayRepository }
-    var transportHomeBuildable: TransportHomeBuildingLogic { dependency.transportHomeBuildable }
 }
